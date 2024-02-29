@@ -8,9 +8,6 @@ class Trip:
         self.place = place
         self.month = month
         self.id = id
-
-    def __repr__(self):
-        return f'<Trip {self.id}: place={self.place}, date={self.date}>'
     
     @property
     def month(self):
@@ -20,9 +17,21 @@ class Trip:
     def month(self, new_month):
         if isinstance(new_month,str):
             if new_month in Trip.MONTHS:
-                print("True")
+                self._month = new_month
             else:
-
                 raise ValueError("String must be a month of the year")
         else:
             raise TypeError("Month must be a string")
+        
+    @property
+    def year(self):
+        return self._year
+
+    @year.setter
+    def year(self, new_year):
+        if isinstance(new_year, int):
+            pass    
+
+
+    def __repr__(self):
+        return f'<Trip {self.id}: place={self.place}, date={self.date}>'
