@@ -26,6 +26,17 @@ class Location:
         else:
             raise TypeError("State must be a string")
 
+    @property
+    def country(self):
+        return self._country
+
+    @country.setter
+    def country(self, new_country):
+        if isinstance (new_country, str):
+           self._country = new_country
+        else:
+            raise TypeError("Country must be a string")
+
     def __repr__(self):
         return f"<city ={self.city}, state={self.state}, country={self.country}>"
 
