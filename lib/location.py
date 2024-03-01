@@ -1,4 +1,5 @@
 from __init__ import CONN, CURSOR
+import ipdb
 
 class Location:
 
@@ -11,6 +12,14 @@ class Location:
             state TEXT,
             country TEXT
             )
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        sql = """
+            DROP TABLE IF EXISTS locations;
         """
         CURSOR.execute(sql)
         CONN.commit()
