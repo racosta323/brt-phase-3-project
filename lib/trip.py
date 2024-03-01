@@ -10,13 +10,12 @@ class Trip:
     def save_to_table(self):
         sql = """
             INSERT INTO trips (month, year)
-            VALUES (?, ?, ?)
+            VALUES (?, ?)
         """
         CURSOR.execute(sql, (self.month, self.year,))
         CONN.cursor()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
-    
 
     def __init__(self, month, year, id = None):
         self.month = month
