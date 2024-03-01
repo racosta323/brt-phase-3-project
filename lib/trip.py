@@ -91,10 +91,10 @@ class Trip:
     def update_row(self):
         sql = """
             UPDATE trips
-            SET month = ?, year = ? traveler_id = ?
+            SET month = ?, year = ?, traveler_id = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.month, self.year, self.traveler_id, self.id,))
+        CURSOR.execute(sql, (self.month, self.year, self.traveler_id, self.id))
         CONN.commit()
 
     def destroy(self):
@@ -139,6 +139,19 @@ class Trip:
             self._year = new_year    
         else:
             raise TypeError("Year must be an integer")
+        
+    ### uncomment when traveler class has a find_by_id method    
+    # @property
+    # def traveler_id(self):
+    #     return self._traveler_id
+    
+    # @traveler_id.setter
+    # def traveler_id(self, new_id):
+    #     from traveler import Traveler
+    #     if(Traveler.find_by_id(new_id)):
+    #         self._traveler_id = new_id
+    #     else:
+    #         raise ValueError("traveler_id must reference an employee in the database")
 
     def __repr__(self):
         return f'<Trip {self.id}: month={self.month} year={self.year} traveler_id = {self.traveler_id}>'
