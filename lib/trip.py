@@ -31,10 +31,30 @@ class Trip:
         CONN.commit()
 
     @classmethod
-    def create_row(cls, month, year):
+    def create_instance(cls, month, year):
         instance = cls(month, year)
         cls.save_to_table(instance)
         return instance
+    
+    @classmethod
+    def find_by_id(cls, id):
+        sql = """
+            SELECT * FROM trips
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
+    
+    @classmethod
+    def instance_from_db(cls, row):
+        trip = cls.all.get(row[0])
+        if trip:
+            trip.month = row[1]
+            trip.year = row[2]
+        else:
+            new_trip = cls(row[1], row[2])
+            cls.all[new_trip.id] = new_trip
+        return trip
 
     def save_to_table(self):
         sql = """
@@ -53,6 +73,14 @@ class Trip:
             WHERE id = ?
         """        
         CURSOR.execute(sql, (self.month, self.year, self.id,))
+        CONN.commit()
+
+    def destory(self):
+        sql = """
+            DELETE FROM trips
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
     def __init__(self, month, year, id = None):
