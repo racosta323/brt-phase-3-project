@@ -9,7 +9,7 @@ from location import Location
 
 
 
-trip1 = Trip("March", 2023)
+# trip1 = Trip("March", 2023)
 
 # location1 = Location("Johnsonville", "South Carolina", "United States")
 

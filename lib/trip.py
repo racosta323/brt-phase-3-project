@@ -30,6 +30,11 @@ class Trip:
         CURSOR.execute(sql)
         CONN.commit()
 
+    @classmethod
+    def create_row(cls, month, year):
+        instance = cls(month, year)
+        cls.save_to_table(instance)
+        return instance
 
     def save_to_table(self):
         sql = """
