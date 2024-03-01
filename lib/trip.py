@@ -46,6 +46,15 @@ class Trip:
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
+    def update_row(self):
+        sql = """
+            UPDATE trips
+            SET month = ?, year = ?
+            WHERE id = ?
+        """        
+        CURSOR.execute(sql, (self.month, self.year, self.id,))
+        CONN.commit()
+
     def __init__(self, month, year, id = None):
         self.month = month
         self.year = year
