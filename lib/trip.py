@@ -13,6 +13,7 @@ class Trip:
             id INTEGER PRIMARY KEY,
             month TEXT,
             year INTEGER,
+            stars INTEGER,
             location_id INTEGER,
             traveler_id INTEGER,
             FOREIGN KEY (location_id) REFERENCES locations(id),
@@ -31,8 +32,8 @@ class Trip:
         CONN.commit()
 
     @classmethod
-    def create_instance(cls, month, year, traveler_id):
-        instance = cls(month, year, traveler_id)
+    def create_instance(cls, month, year, stars, traveler_id):
+        instance = cls(month, year, stars, traveler_id)
         cls.save_to_table(instance)
         return instance
     
@@ -62,6 +63,7 @@ class Trip:
         if trip:
             trip.month = row[1]
             trip.year = row[2]
+            trip.stars = row[3]
             trip.traveler_id = row[4]
             trip.id = row[0]
             return trip
@@ -76,14 +78,18 @@ class Trip:
             SELECT * FROM trips
         """
         rows = CURSOR.execute(sql).fetchall()
-        return [cls.instance_from_db(row) for row in rows]
+        list_of_rows = [cls.instance_from_db(row) for row in rows]
+        if list_of_rows:
+            return list_of_rows
+        else:
+            raise ValueError("Table does not have any data")  
 
     def save_to_table(self):
         sql = """
-            INSERT INTO trips (month, year, id)
+            INSERT INTO trips (month, year, stars, traveler_id)
             VALUES (?, ?, ?, ?)
         """
-        CURSOR.execute(sql, (self.month, self.year, self.traveler_id, self.id,))
+        CURSOR.execute(sql, (self.month, self.year, self.stars, self.traveler_id,))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -91,10 +97,10 @@ class Trip:
     def update_row(self):
         sql = """
             UPDATE trips
-            SET month = ?, year = ?, traveler_id = ?
+            SET month = ?, year = ?, stars = ?, traveler_id = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.month, self.year, self.traveler_id, self.id))
+        CURSOR.execute(sql, (self.month, self.year, self.stars, self.traveler_id, self.id))
         CONN.commit()
 
     def destroy(self):
@@ -109,9 +115,10 @@ class Trip:
         del type(self).all[self.id]
         self.id = None
 
-    def __init__(self, month, year, traveler_id, id = None):
+    def __init__(self, month, year, stars, traveler_id, id = None):
         self.month = month
         self.year = year
+        self.stars = stars
         self.id = id
         self.traveler_id = traveler_id
 
@@ -139,6 +146,20 @@ class Trip:
             self._year = new_year    
         else:
             raise TypeError("Year must be an integer")
+        
+    @property
+    def stars(self):
+        return self._stars
+
+    @stars.setter
+    def stars(self, new_stars):
+        if isinstance(new_stars, int):
+            if 0 <= new_stars <= 5:
+                self._stars = new_stars
+            else:
+                raise ValueError("Stars must be an integer between 0 and 5")    
+        else:
+            raise ValueError("Stars must be an integer")
         
     ### uncomment when traveler class has a find_by_id method    
     # @property
