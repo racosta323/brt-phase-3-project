@@ -55,6 +55,14 @@ class Trip:
             new_trip = cls(row[1], row[2])
             cls.all[new_trip.id] = new_trip
         return trip
+    
+    @classmethod
+    def get_all_from_db(cls):
+        sql = """
+            SELECT * FROM trips
+        """
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
 
     def save_to_table(self):
         sql = """
@@ -82,6 +90,10 @@ class Trip:
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
+
+        #also delete from dict
+        del type(self).all[self.id]
+        self.id = None
 
     def __init__(self, month, year, id = None):
         self.month = month
