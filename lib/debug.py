@@ -6,5 +6,5 @@ import ipdb
 
 #datetime requires year,month,date: https://www.w3schools.com/python/python_datetime.asp
 
-trip1 = Trip("Austin", 3, "2023")
-# ipdb.set_trace()
+trip1 = Trip("Austin", "March", 2023)
+ipdb.set_trace()
