@@ -7,13 +7,37 @@ class Trip:
     all = {}
 
     @classmethod
+    def create_table(cls):
+        sql = """
+            CREATE TABLE IF NOT EXISTS trips (
+            id INTEGER PRIMARY KEY,
+            month TEXT,
+            year INTEGER,
+            location_id INTEGER,
+            traveler_id INTEGER,
+            FOREIGN KEY (location_id) REFERENCES locations(id),
+            FOREIGN KEY (traveler_id) REFERENCES travelers(id)
+            )
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        sql = """
+            DROP TABLE IF EXISTS trips;
+        """      
+        CURSOR.execute(sql)
+        CONN.commit()
+
+
     def save_to_table(self):
         sql = """
-            INSERT INTO trips (month, year)
-            VALUES (?, ?)
+            INSERT INTO trips (month, year, id)
+            VALUES (?, ?, ?)
         """
-        CURSOR.execute(sql, (self.month, self.year,))
-        CONN.cursor()
+        CURSOR.execute(sql, (self.month, self.year, self.id,))
+        CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
