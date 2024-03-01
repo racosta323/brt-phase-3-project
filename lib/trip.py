@@ -45,6 +45,16 @@ class Trip:
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
     
+    #find by name when I link to traveler; needs work
+    # @classmethod
+    # def find_by_name(cls, name):
+    #     sql = """
+    #         SELECT * FROM trips
+    #         WHERE name = ?
+    #     """
+    #     row = CURSOR.execute(sql, (name,)).fetchone()
+    #     return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
+
     @classmethod
     def instance_from_db(cls, row):
         trip = cls.all.get(row[0])
@@ -83,7 +93,7 @@ class Trip:
         CURSOR.execute(sql, (self.month, self.year, self.id,))
         CONN.commit()
 
-    def destory(self):
+    def destroy(self):
         sql = """
             DELETE FROM trips
             WHERE id = ?
