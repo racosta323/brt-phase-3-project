@@ -1,4 +1,20 @@
+from __init__ import CONN, CURSOR
+
 class Location:
+
+    @classmethod
+    def create_table(cls):
+        sql = """
+            CREATE TABLE locations (
+            id INTEGER PRIMARY KEY,
+            city TEXT,
+            state TEXT,
+            country TEXT
+            )
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
     def __init__(self, city, state, country, id = None):
         self.city = city
         self.state = state
@@ -39,17 +55,5 @@ class Location:
             raise TypeError("Country must be a string")
 
 
-    def create():
-        pass
-
-    def delete():
-        pass
-
-    def get_all():
-        pass
-
-    def find_by_id():
-        pass
-
     def __repr__(self):
-        return f"<city ={self.city}, state={self.state}, country={self.country}, id ={self.id}>"
+        return f"<city ={self.city}, state={self.state}, country={self.country}>"
