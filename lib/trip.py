@@ -4,9 +4,11 @@ class Trip:
 
     MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}
 
+    
     def __init__(self, place, month, year, id = None):
         self.place = place
         self.month = month
+        self.year = year
         self.id = id
     
     @property
@@ -30,8 +32,9 @@ class Trip:
     @year.setter
     def year(self, new_year):
         if isinstance(new_year, int):
-            pass    
-
+            self._year = new_year    
+        else:
+            raise TypeError("Year must be an integer")
 
     def __repr__(self):
         return f'<Trip {self.id}: place={self.place}, date={self.date}>'
