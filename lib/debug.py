@@ -4,6 +4,7 @@ from trip import Trip
 import datetime
 import ipdb
 from location import Location
+from __init__ import CONN, CURSOR
 
 #datetime requires year,month,date: https://www.w3schools.com/python/python_datetime.asp
 

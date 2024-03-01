@@ -31,8 +31,8 @@ class Trip:
         CONN.commit()
 
     @classmethod
-    def create_instance(cls, month, year):
-        instance = cls(month, year)
+    def create_instance(cls, month, year, traveler_id):
+        instance = cls(month, year, traveler_id)
         cls.save_to_table(instance)
         return instance
     
@@ -43,6 +43,7 @@ class Trip:
             WHERE id = ?
         """
         row = CURSOR.execute(sql, (id,)).fetchone()
+        ipdb.set_trace()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
     
     #find by name when I link to traveler; needs work
@@ -61,10 +62,13 @@ class Trip:
         if trip:
             trip.month = row[1]
             trip.year = row[2]
+            trip.traveler_id = row[4]
+            trip.id = row[0]
+            return trip
         else:
-            new_trip = cls(row[1], row[2])
+            new_trip = cls(row[1], row[2], row[4], row[0])
             cls.all[new_trip.id] = new_trip
-        return trip
+            return new_trip
     
     @classmethod
     def get_all_from_db(cls):
@@ -77,9 +81,9 @@ class Trip:
     def save_to_table(self):
         sql = """
             INSERT INTO trips (month, year, id)
-            VALUES (?, ?, ?)
+            VALUES (?, ?, ?, ?)
         """
-        CURSOR.execute(sql, (self.month, self.year, self.id,))
+        CURSOR.execute(sql, (self.month, self.year, self.traveler_id, self.id,))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -87,10 +91,10 @@ class Trip:
     def update_row(self):
         sql = """
             UPDATE trips
-            SET month = ?, year = ?
+            SET month = ?, year = ? traveler_id = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.month, self.year, self.id,))
+        CURSOR.execute(sql, (self.month, self.year, self.traveler_id, self.id,))
         CONN.commit()
 
     def destroy(self):
@@ -105,10 +109,11 @@ class Trip:
         del type(self).all[self.id]
         self.id = None
 
-    def __init__(self, month, year, id = None):
+    def __init__(self, month, year, traveler_id, id = None):
         self.month = month
         self.year = year
         self.id = id
+        self.traveler_id = traveler_id
 
     @property
     def month(self):
@@ -136,4 +141,4 @@ class Trip:
             raise TypeError("Year must be an integer")
 
     def __repr__(self):
-        return f'<Trip {self.id}: month={self.month} year={self.year}>'
+        return f'<Trip {self.id}: month={self.month} year={self.year} traveler_id = {self.traveler_id}>'
