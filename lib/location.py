@@ -1,8 +1,9 @@
 class Location:
-    def __init__(self, city, state, country):
+    def __init__(self, city, state, country, id = None):
         self.city = city
         self.state = state
         self.country = country
+        self.id = id
 
     @property
     def city(self):
@@ -37,8 +38,6 @@ class Location:
         else:
             raise TypeError("Country must be a string")
 
-    def __repr__(self):
-        return f"<city ={self.city}, state={self.state}, country={self.country}>"
 
     def create():
         pass
@@ -51,3 +50,6 @@ class Location:
 
     def find_by_id():
         pass
+
+    def __repr__(self):
+        return f"<city ={self.city}, state={self.state}, country={self.country}, id ={self.id}>"
