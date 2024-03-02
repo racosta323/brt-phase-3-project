@@ -68,7 +68,7 @@ class Trip:
             trip.id = row[0]
             return trip
         else:
-            new_trip = cls(row[1], row[2], row[4], row[0])
+            new_trip = cls(row[1], row[2], row[3], row[4], row[0])
             cls.all[new_trip.id] = new_trip
             return new_trip
     
@@ -83,6 +83,20 @@ class Trip:
             return list_of_rows
         else:
             raise ValueError("Table does not have any data")  
+    
+    @classmethod
+    def find_name(cls, name):
+        from traveler import Traveler
+        # ipdb.set_trace()
+        for traveler in Traveler.all:
+            # ipdb.set_trace()
+            if name == Traveler.all[traveler].name:
+                return name
+            else:
+                print("not here")
+
+
+            
 
     def save_to_table(self):
         sql = """
@@ -161,18 +175,18 @@ class Trip:
         else:
             raise ValueError("Stars must be an integer")
         
-    ### uncomment when traveler class has a find_by_id method    
-    # @property
-    # def traveler_id(self):
-    #     return self._traveler_id
+    ## uncomment when traveler class has a find_by_id method    
+    @property
+    def traveler_id(self):
+        return self._traveler_id
     
-    # @traveler_id.setter
-    # def traveler_id(self, new_id):
-    #     from traveler import Traveler
-    #     if(Traveler.find_by_id(new_id)):
-    #         self._traveler_id = new_id
-    #     else:
-    #         raise ValueError("traveler_id must reference an employee in the database")
+    @traveler_id.setter
+    def traveler_id(self, new_id):
+        from traveler import Traveler
+        if isinstance(new_id, Traveler):
+            self._traveler_id = new_id
+        else:
+            raise TypeError("The traveler_id must be an instance of Traveler")
 
     def __repr__(self):
         return f'<Trip {self.id}: month={self.month} year={self.year} traveler_id = {self.traveler_id}>'
