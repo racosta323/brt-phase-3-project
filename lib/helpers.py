@@ -1,11 +1,16 @@
-from cli import main
+import ipdb
+# from cli import main
 from trip import Trip
+
+name = ""
+age = ""
+traveler_id =""
 
 def greeting():
     name = input("What is your name? ")
     age = input("How old are you? ")
     print(f'Hello, {name}! Nice to meet you.')
-
+    return name, age
         
 def exit_program():
     print("Until next time, Traveler!")
@@ -22,19 +27,20 @@ def user_menu():
     print("2. Show my locations.")
     choice = input("> ")
     if choice == "1":
-        enter_location()
+        create_trip()
     if choice == "2":
         pass
 
-def enter_location():    
-    print("What city have you been to? (Enter a location.)")
-    city = input("> ")
-    print("In what state?")
-    state = input("> ")
-    print("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)")
-    stars = input("> ")
-    print("Cool. Thanks. Your entry has been recorded.")
-    main()
+def create_trip():    
+    city = input("What city have you been to? (Enter a location.)> ")
+    state = input("In what state?> ")
+    stars = input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> ")
+    try:
+        trip = Trip.create_instance(city, state, stars)
+        print("Cool. Thanks. Your entry has been recorded.")
+    except Exception as exc:
+        print("Error creating trip: ", exc)
+
 
 def show_locations_menu():
     print("1. Show all locations I've been to.")

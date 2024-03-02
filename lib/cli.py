@@ -8,7 +8,7 @@ from helpers import (
 )
 
 def main():
-    # greeting()
+    greeting()
     # while True:
     menu()
     choice = input("> ")
