@@ -1,4 +1,7 @@
 # traveler.py
+import ipdb
+
+from __init__ import CONN, CURSOR
 
 class Traveler:
 
@@ -51,3 +54,18 @@ class Traveler:
 
     def __repr__(self):
         return f"<name={self.name}, id={self.id}, age={self.age}>"
+    
+    ##adding temporarily
+    def get_all_by_name(self):
+        ipdb.set_trace()
+        sql = """
+            SELECT travelers.name, trips.month, trips.year, trips.stars 
+            FROM trips
+            JOIN travelers 
+            ON trips.traveler_id = travelers.id
+            WHERE travelers.name = ?;
+        """
+        row = CURSOR.execute(sql,(self.name,)).fetchall()
+        print(row)
+
+        
