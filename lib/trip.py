@@ -183,10 +183,11 @@ class Trip:
     @traveler_id.setter
     def traveler_id(self, new_id):
         from traveler import Traveler
-        if isinstance(new_id, Traveler):
+        if new_id in Traveler.all:
             self._traveler_id = new_id
         else:
-            raise TypeError("The traveler_id must be an instance of Traveler")
+            raise TypeError("ID must be associated with ID in traveler class")
+        
 
     def __repr__(self):
         return f'<Trip {self.id}: month={self.month} year={self.year} traveler_id = {self.traveler_id}>'

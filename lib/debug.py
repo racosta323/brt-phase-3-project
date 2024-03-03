@@ -11,12 +11,14 @@ from __init__ import CONN, CURSOR
 
 
 # create_instance(cls, month, year, stars, traveler_id)
-# trip1 = Trip("March", 2023)
 # location1 = Location("Johnsonville", "South Carolina", "United States")
 
-#def __init__(self, full_name, id, age):
-t1 = Traveler("Rene", 1, 35)
-t2 = Traveler("Keya", 2, 25)
+# from traveler: def __init__(self, full_name, id, age):
+tr1 = Traveler("Rene", 1, 35)
+tr2 = Traveler("Keya", 2, 25)
+
+trip1 = Trip.create_instance("March", 2020, 4, 2)
+
 
 
 ipdb.set_trace()
