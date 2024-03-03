@@ -1,8 +1,15 @@
 class Location:
-    def __init__(self, city, state, country):
+
+    #using faux data for now; later switch to empty dict
+    all = {}
+
+    def __init__(self, city, state, country, id = None):
         self.city = city
         self.state = state
         self.country = country
+        self.id = id
+        #added temporarily
+        Location.all[self.id] = self
 
     @property
     def city(self):
@@ -38,7 +45,7 @@ class Location:
             raise TypeError("Country must be a string")
 
     def __repr__(self):
-        return f"<city ={self.city}, state={self.state}, country={self.country}>"
+        return f"<Location_id {self.id}: city ={self.city}, state={self.state}, country={self.country}>"
 
     def create():
         pass

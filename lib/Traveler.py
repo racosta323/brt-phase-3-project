@@ -56,7 +56,7 @@ class Traveler:
         return f"<name={self.name}, id={self.id}, age={self.age}>"
     
     ##adding temporarily
-    def get_all_by_name(self):
+    def get_all_travels_by_name(self):
         ipdb.set_trace()
         sql = """
             SELECT travelers.name, trips.month, trips.year, trips.stars 
