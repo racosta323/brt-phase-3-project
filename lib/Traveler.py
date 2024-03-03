@@ -59,10 +59,18 @@ class Traveler:
     def get_all_travels_by_name(self):
         ipdb.set_trace()
         sql = """
-            SELECT travelers.name, trips.month, trips.year, trips.stars 
+            SELECT travelers.name, 
+            locations.city, 
+            locations.state,
+            locations.country,
+            trips.month,
+            trips.year,
+            trips.stars 
             FROM trips
-            JOIN travelers 
+            JOIN travelers
             ON trips.traveler_id = travelers.id
+            JOIN locations
+            ON trips.location_id = locations.id
             WHERE travelers.name = ?;
         """
         row = CURSOR.execute(sql,(self.name,)).fetchall()
