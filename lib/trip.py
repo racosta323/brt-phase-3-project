@@ -199,7 +199,6 @@ class Trip:
     @location_id.setter
     def location_id(self, new_id):
         from location import Location
-        ipdb.set_trace()
         if new_id in Location.all:
             self._location_id = new_id
         else:
