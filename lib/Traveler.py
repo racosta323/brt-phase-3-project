@@ -1,8 +1,5 @@
 # traveler.py
-import sqlite3
-
-CONN = sqlite3.connect(':memory:')
-CURSOR = CONN.cursor()
+from __init__ import CONN,CURSOR
 
 class Traveler:
     all = {}
