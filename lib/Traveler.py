@@ -99,9 +99,8 @@ class Traveler:
         del type(self).all[self.id]
         self.id = None
 
-    def __init__(self, full_name, traveler_id, age, id=None):
-        self.full_name = full_name
-        self.traveler_id = traveler_id
+    def __init__(self, name, traveler_id, age, id=None):
+        self.name = name
         self.age = age
         self.id = id
 
@@ -164,4 +163,3 @@ class Traveler:
         print(row)
         # return row
 
-        

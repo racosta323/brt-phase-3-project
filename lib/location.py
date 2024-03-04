@@ -3,10 +3,16 @@ from __init__ import CONN, CURSOR
 
 class Location:
 
-    #using faux data for now; later switch to empty dict
+    # using faux data for now; later switch to empty dict
     all = {}
 
-    def __init__(self, city, state, country, id = None):
+    def __init__(self, city, state, country, id=None):
+        self.city = city
+        self.state = state
+        self.country = country
+        self.id = id
+        # added temporarily
+        Location.all[self.id] = self
 
     @classmethod
     def create_table(cls):
@@ -29,23 +35,14 @@ class Location:
         CURSOR.execute(sql)
         CONN.commit()
 
-
-    def __init__(self, city, state, country, id = None):
-        self.city = city
-        self.state = state
-        self.country = country
-        self.id = id
-        #added temporarily
-        Location.all[self.id] = self
-
     @property
     def city(self):
         return self._city
 
     @city.setter
     def city(self, new_city):
-        if isinstance (new_city, str):
-           self._city = new_city
+        if isinstance(new_city, str):
+            self._city = new_city
         else:
             raise TypeError("City must be a string")
 
@@ -55,8 +52,8 @@ class Location:
 
     @state.setter
     def state(self, new_state):
-        if isinstance (new_state, str):
-           self._state = new_state
+        if isinstance(new_state, str):
+            self._state = new_state
         else:
             raise TypeError("State must be a string")
 
@@ -66,11 +63,10 @@ class Location:
 
     @country.setter
     def country(self, new_country):
-        if isinstance (new_country, str):
-           self._country = new_country
+        if isinstance(new_country, str):
+            self._country = new_country
         else:
             raise TypeError("Country must be a string")
-
 
     def __repr__(self):
         return f"<Location_id {self.id}: city ={self.city}, state={self.state}, country={self.country}>"
