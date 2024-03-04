@@ -145,7 +145,7 @@ class Traveler:
     ##adding temporarily
     def get_all_travels_by_name(self):
         sql = """
-            SELECT travelers.name, 
+            SELECT trips.id, 
             locations.city, 
             locations.state,
             locations.country,
@@ -160,7 +160,7 @@ class Traveler:
             WHERE travelers.name = ?;
         """
         row = CURSOR.execute(sql,(self.name,)).fetchall()
-        # print(row)
+        print(row)
         return row
 
     def trips_by_stars(self, stars):
@@ -183,5 +183,6 @@ class Traveler:
                 print(trip)
                 return trip
             else:
-                LookupError("No travels by this state")                
+                LookupError("No travels by this state")
+                                
 

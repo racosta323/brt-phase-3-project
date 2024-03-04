@@ -227,9 +227,20 @@ class Trip:
     def __repr__(self):
         return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'
     
-
-    # def trips_by_stars(self, input):
-    #     pass 
+    #NEEDS WORK
+    @classmethod
+    def update_by_id(cls, id_entry):
+        Trip.get_all_from_db()
+        ipdb.set_trace()
+        print(id_entry)
+        for trip in Trip.all:
+            ipdb.set_trace()
+            pass
+            # if id_entry == trip.id:
+            #     ipdb.set_trace()
+            #     pass
+            # else:
+            #     print("not here")
 
     ## for testing
     @classmethod

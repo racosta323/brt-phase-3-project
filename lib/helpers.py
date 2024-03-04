@@ -3,6 +3,7 @@ import ipdb
 from trip import Trip
 from location import Location
 from traveler import Traveler
+# from menus import menu
 
 traveler = []
 age_list = []
@@ -40,6 +41,7 @@ def create_trip():
         tr2 = Traveler("Keya", 2, 25)
         trip = Trip.create_instance(month, year, stars, location.id, 1)
         print("Cool. Thanks. Your entry has been recorded.")
+        # menu()
     except Exception as exc:
         print("Error creating trip: ", exc)
     
@@ -61,4 +63,12 @@ def trips_by_country():
 def trips_by_state():
     person = Traveler(traveler[0], 1, int(age_list[0]))
     state = input("Enter the abbr. for the state:> ")
-    person.trips_by_state(state)    
+    person.trips_by_state(state)
+
+def update_user_trip():
+    person = Traveler(traveler[0], 1, int(age_list[0]))
+    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    print("What do you want to update?")
+    
+
+      
