@@ -1,12 +1,12 @@
 from __init__ import CONN, CURSOR
-import ipdb
+
 
 class Location:
 
     @classmethod
     def create_table(cls):
         sql = """
-            CREATE TABLE locations (
+            CREATE TABLE IF NOT EXISTS locations (
             id INTEGER PRIMARY KEY,
             city TEXT,
             state TEXT,
@@ -23,6 +23,7 @@ class Location:
         """
         CURSOR.execute(sql)
         CONN.commit()
+
 
     def __init__(self, city, state, country, id = None):
         self.city = city
