@@ -1,6 +1,7 @@
 import ipdb
 # from cli import main
 from trip import Trip
+from location import Location
 
 name = ""
 age = ""
@@ -31,16 +32,20 @@ def user_menu():
     if choice == "2":
         pass
 
-def create_trip():    
+def create_trip():
+    Trip.create_table()    
     city = input("What city have you been to? (Enter a location.)> ")
     state = input("In what state?> ")
-    stars = input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> ")
+    country = input("In what country?> ")
+    stars = int(input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> "))
+    year = int(input("What year did you go?> "))
+    month = input("In what month?> ")
     try:
-        trip = Trip.create_instance(city, state, stars)
+        location = Location(city, state, country, 1)
+        trip = Trip.create_instance(month, year, stars, location.id, 1)
         print("Cool. Thanks. Your entry has been recorded.")
     except Exception as exc:
         print("Error creating trip: ", exc)
-
 
 def show_locations_menu():
     print("1. Show all locations I've been to.")
