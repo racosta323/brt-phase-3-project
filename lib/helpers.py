@@ -2,6 +2,7 @@ import ipdb
 # from cli import main
 from trip import Trip
 from location import Location
+from traveler import Traveler
 
 name = ""
 age = ""
@@ -42,6 +43,8 @@ def create_trip():
     month = input("In what month?> ")
     try:
         location = Location(city, state, country, 1)
+        tr1 = Traveler("Rene", 1, 35)
+        tr2 = Traveler("Keya", 2, 25)
         trip = Trip.create_instance(month, year, stars, location.id, 1)
         print("Cool. Thanks. Your entry has been recorded.")
     except Exception as exc:
