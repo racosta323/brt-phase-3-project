@@ -2,6 +2,8 @@
 from helpers import (
     greeting,
     exit_program,
+)
+from menus import (
     menu,
     user_menu,
     friends_menu
@@ -21,8 +23,6 @@ def main():
     else:
         print("Invalid choice -- enter number corresponding to menu item")
 
-
-    
              
 if __name__ == '__main__':
     main()
