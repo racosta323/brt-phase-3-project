@@ -7,6 +7,10 @@ class Location:
     all = {}
 
     def __init__(self, city, state, country, id = None):
+        self.city = city
+        self.state = state
+        self.country = country
+        self.id = id
 
     @classmethod
     def create_table(cls):
@@ -86,3 +90,5 @@ class Location:
 
     def find_by_id():
         pass
+
+

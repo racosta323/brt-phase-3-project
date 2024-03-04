@@ -70,6 +70,7 @@ def show_locations_menu():
     print("2. Show locations I've been to by country.")
     print("3. Show locations I've been to by state.")
     print("4. Show locations I've been to with X stars")
+    print("5. Update a location I've been to.")
     choice = input("> ")
     if choice == "1":
         travels_by_name()
@@ -78,6 +79,8 @@ def show_locations_menu():
     elif choice == "3":
         pass
     elif choice == "4":
+        trips_by_stars()
+    elif choice == "5":
         pass
     elif choice == "0":
         exit_program()
@@ -88,10 +91,27 @@ def travels_by_name():
     person = Traveler(traveler[0], 1, int(age_list[0]))
     Traveler.get_all_travels_by_name(person)
 
+def trips_by_stars():
+    person = Traveler(traveler[0], 1, int(age_list[0]))
+    stars = input("Enter number of stars:> ")
+    ipdb.set_trace()
+    person.trips_by_stars(stars)
+
 def show_all_loc_menu():
     print("1. Sort by date of visit.")
     print("2. Sort alphabetically by state.")
     print("3. Sort alphabetically by country.")
+    choice = input("> ")
+    if choice == 1:
+        Trip.get_all_by_visit()
+    elif choice == 2:
+        pass
+    elif choice == 3:
+        pass
+    elif choice == 0:
+        exit_program()
+    else:
+        print("Invalid choice -- enter number corresponding to menu item")
     
 
 def friends_menu():

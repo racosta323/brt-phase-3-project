@@ -85,8 +85,28 @@ class Trip:
         else:
             raise ValueError("Table does not have any data")  
     
-   
-        
+    @classmethod
+    def get_all_by_visit(cls):
+        sql = """
+            SELECT travelers.name,
+            locations.city,
+            locations.state,
+            locations.country,
+            trips.month,
+            trips.year,
+            trips.stars 
+            FROM trips
+            JOIN travelers
+            ON trips.traveler_id = travelers.id
+            JOIN locations
+            ON trips.location_id = locations.id
+            ORDER BY year, month
+        """
+        rows = CURSOR.execute(sql).fetchall()
+        if rows:
+            print(rows)
+        else:
+            raise ValueError("Table does not have any data")
 
     #this method probably shouldn't be in this class, but instead in the Traveler class
     #leaving temporarily to complete other methods, but may consider removing later
@@ -205,8 +225,11 @@ class Trip:
             raise TypeError("ID must be associated with ID in location class")        
         
     def __repr__(self):
-        return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, traveler_id = {self.traveler_id}>'
+        return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'
     
+
+    # def trips_by_stars(self, input):
+    #     pass 
 
     ## for testing
     @classmethod
