@@ -1,7 +1,34 @@
+from __init__ import CONN, CURSOR
+
+
 class Location:
 
     #using faux data for now; later switch to empty dict
     all = {}
+
+    def __init__(self, city, state, country, id = None):
+
+    @classmethod
+    def create_table(cls):
+        sql = """
+            CREATE TABLE IF NOT EXISTS locations (
+            id INTEGER PRIMARY KEY,
+            city TEXT,
+            state TEXT,
+            country TEXT
+            )
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        sql = """
+            DROP TABLE IF EXISTS locations;
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
 
     def __init__(self, city, state, country, id = None):
         self.city = city
@@ -43,6 +70,7 @@ class Location:
            self._country = new_country
         else:
             raise TypeError("Country must be a string")
+
 
     def __repr__(self):
         return f"<Location_id {self.id}: city ={self.city}, state={self.state}, country={self.country}>"

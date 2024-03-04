@@ -9,8 +9,12 @@ from __init__ import CONN, CURSOR
 
 #datetime requires year,month,date: https://www.w3schools.com/python/python_datetime.asp
 
+<<<<<<< HEAD
+trip1 = Trip( "March", 2023)
+=======
 
 # create_instance(cls, month, year, stars, location_id, traveler_id)
+>>>>>>> origin
 
 
 # from traveler: def __init__(self, full_name, id, age):
