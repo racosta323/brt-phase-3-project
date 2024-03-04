@@ -57,7 +57,6 @@ class Traveler:
     
     ##adding temporarily
     def get_all_travels_by_name(self):
-        ipdb.set_trace()
         sql = """
             SELECT travelers.name, 
             locations.city, 
@@ -75,5 +74,6 @@ class Traveler:
         """
         row = CURSOR.execute(sql,(self.name,)).fetchall()
         print(row)
+        return row
 
         

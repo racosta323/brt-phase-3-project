@@ -4,14 +4,22 @@ from trip import Trip
 from location import Location
 from traveler import Traveler
 
-name = ""
-age = ""
+traveler = []
+age_list = []
 traveler_id =""
 
 def greeting():
+    print("Welcome! Enter your details to see menu options. (Enter 0 anytime to go back to exit.)")
     name = input("What is your name? ")
+    if name == "0":
+        exit_program()
     age = input("How old are you? ")
+    if age == "0":
+        exit_program()
     print(f'Hello, {name}! Nice to meet you.')
+    #add to travelers db (pending)
+    traveler.append(name)
+    age_list.append(age)
     return name, age
         
 def exit_program():
@@ -26,12 +34,14 @@ def menu():
 
 def user_menu():
     print("1. Enter a record of a location you've been to")
-    print("2. Show my locations.")
+    print("2. Show locations I've been to.")
     choice = input("> ")
     if choice == "1":
         create_trip()
     if choice == "2":
-        pass
+        show_locations_menu()
+           
+       
 
 def create_trip():
     Trip.create_table()    
@@ -55,6 +65,20 @@ def show_locations_menu():
     print("2. Show locations I've been to by country.")
     print("3. Show locations I've been to by state.")
     print("4. Show locations I've been to with X stars")
+    choice = input("> ")
+    if choice == "1":
+        travels_by_name()
+    if choice == "2":
+        pass
+    if choice == "3":
+        pass
+    if choice == "4":
+        pass
+    
+def travels_by_name():    
+    person = Traveler(traveler[0], 1, int(age_list[0]))
+    ipdb.set_trace()
+    Traveler.get_all_travels_by_name(person)
 
 def show_all_loc_menu():
     print("1. Sort by date of visit.")
