@@ -74,6 +74,6 @@ class Traveler:
         """
         row = CURSOR.execute(sql,(self.name,)).fetchall()
         print(row)
-        return row
+        # return row
 
         

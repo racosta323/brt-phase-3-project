@@ -9,7 +9,7 @@ age_list = []
 traveler_id =""
 
 def greeting():
-    print("Welcome! Enter your details to see menu options. (Enter 0 anytime to go back to exit.)")
+    print("Welcome! Enter your details to see menu options. (Enter 0 anytime to exit.)")
     name = input("What is your name? ")
     if name == "0":
         exit_program()
@@ -31,6 +31,7 @@ def menu():
     print("0. Exit the program")
     print("1. Where have you been?")
     print("2. Where have your friends been?")
+    print("3. Show all travels (you and friends)")
 
 def user_menu():
     print("1. Enter a record of a location you've been to")
@@ -38,11 +39,15 @@ def user_menu():
     choice = input("> ")
     if choice == "1":
         create_trip()
-    if choice == "2":
+    elif choice == "2":
         show_locations_menu()
+    elif choice == "3":
+        show_all_loc_menu()
+    elif choice == "0":
+        exit_program()
+    else:
+        print("Invalid choice -- enter number corresponding to menu item")    
            
-       
-
 def create_trip():
     Trip.create_table()    
     city = input("What city have you been to? (Enter a location.)> ")
@@ -68,16 +73,19 @@ def show_locations_menu():
     choice = input("> ")
     if choice == "1":
         travels_by_name()
-    if choice == "2":
+    elif choice == "2":
         pass
-    if choice == "3":
+    elif choice == "3":
         pass
-    if choice == "4":
+    elif choice == "4":
         pass
+    elif choice == "0":
+        exit_program()
+    else:
+        print("Invalid choice -- enter number corresponding to menu item")
     
 def travels_by_name():    
     person = Traveler(traveler[0], 1, int(age_list[0]))
-    ipdb.set_trace()
     Traveler.get_all_travels_by_name(person)
 
 def show_all_loc_menu():
