@@ -32,8 +32,8 @@ class Trip:
         CONN.commit()
 
     @classmethod
-    def create_instance(cls, month, year, stars, traveler_id):
-        instance = cls(month, year, stars, traveler_id)
+    def create_instance(cls, month, year, stars, location_id, traveler_id):
+        instance = cls(month, year, stars, location_id, traveler_id)
         cls.save_to_table(instance)
         return instance
     
@@ -64,11 +64,12 @@ class Trip:
             trip.month = row[1]
             trip.year = row[2]
             trip.stars = row[3]
-            trip.traveler_id = row[4]
+            trip.location_id = row[4]
+            trip.traveler_id = row[5]
             trip.id = row[0]
             return trip
         else:
-            new_trip = cls(row[1], row[2], row[4], row[0])
+            new_trip = cls(row[1], row[2], row[3], row[4], row[5], row[0])
             cls.all[new_trip.id] = new_trip
             return new_trip
     
@@ -83,24 +84,40 @@ class Trip:
             return list_of_rows
         else:
             raise ValueError("Table does not have any data")  
+    
+   
+        
+
+    #this method probably shouldn't be in this class, but instead in the Traveler class
+    #leaving temporarily to complete other methods, but may consider removing later
+    @classmethod
+    def find_name_by_id(cls, trav_id):
+        from traveler import Traveler
+        if trav_id in Traveler.all:
+            return Traveler.all[trav_id].name
+        else:
+            ipdb.set_trace()
+            raise Exception
+         
 
     def save_to_table(self):
         sql = """
-            INSERT INTO trips (month, year, stars, traveler_id)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO trips (month, year, stars, location_id, traveler_id)
+            VALUES (?, ?, ?, ?, ?)
         """
-        CURSOR.execute(sql, (self.month, self.year, self.stars, self.traveler_id,))
+        CURSOR.execute(sql, (self.month, self.year, self.stars, self.location_id, self.traveler_id,))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
-
+    
+    
     def update_row(self):
         sql = """
             UPDATE trips
-            SET month = ?, year = ?, stars = ?, traveler_id = ?
+            SET month = ?, year = ?, stars = ?, location_id = ?, traveler_id = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.month, self.year, self.stars, self.traveler_id, self.id))
+        CURSOR.execute(sql, (self.month, self.year, self.stars, self.location_id, self.traveler_id, self.id))
         CONN.commit()
 
     def destroy(self):
@@ -115,10 +132,11 @@ class Trip:
         del type(self).all[self.id]
         self.id = None
 
-    def __init__(self, month, year, stars, traveler_id, id = None):
+    def __init__(self, month, year, stars, location_id, traveler_id, id = None):
         self.month = month
         self.year = year
         self.stars = stars
+        self.location_id = location_id
         self.id = id
         self.traveler_id = traveler_id
 
@@ -160,19 +178,39 @@ class Trip:
                 raise ValueError("Stars must be an integer between 0 and 5")    
         else:
             raise ValueError("Stars must be an integer")
-        
-    ### uncomment when traveler class has a find_by_id method    
-    # @property
-    # def traveler_id(self):
-    #     return self._traveler_id
+           
+    @property
+    def traveler_id(self):
+        return self._traveler_id
     
-    # @traveler_id.setter
-    # def traveler_id(self, new_id):
-    #     from traveler import Traveler
-    #     if(Traveler.find_by_id(new_id)):
-    #         self._traveler_id = new_id
-    #     else:
-    #         raise ValueError("traveler_id must reference an employee in the database")
+    @traveler_id.setter
+    def traveler_id(self, new_id):
+        from traveler import Traveler
+        if new_id in Traveler.all:
+            self._traveler_id = new_id
+        else:
+            raise TypeError("ID must be associated with ID in traveler class")
+        
 
+    @property
+    def location_id(self):
+        return self._location_id
+
+    @location_id.setter
+    def location_id(self, new_id):
+        from location import Location
+        if new_id in Location.all:
+            self._location_id = new_id
+        else:
+            raise TypeError("ID must be associated with ID in location class")        
+        
     def __repr__(self):
-        return f'<Trip {self.id}: month={self.month} year={self.year} traveler_id = {self.traveler_id}>'
+        return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, traveler_id = {self.traveler_id}>'
+    
+
+    ## for testing
+    @classmethod
+    def reset(cls):
+        cls.all = {}
+        cls.drop_table()
+        cls.create_table()
