@@ -3,6 +3,11 @@ from __init__ import CONN, CURSOR
 
 class Location:
 
+    #using faux data for now; later switch to empty dict
+    all = {}
+
+    def __init__(self, city, state, country, id = None):
+
     @classmethod
     def create_table(cls):
         sql = """
@@ -30,6 +35,8 @@ class Location:
         self.state = state
         self.country = country
         self.id = id
+        #added temporarily
+        Location.all[self.id] = self
 
     @property
     def city(self):
@@ -66,4 +73,16 @@ class Location:
 
 
     def __repr__(self):
-        return f"<city ={self.city}, state={self.state}, country={self.country}>"
+        return f"<Location_id {self.id}: city ={self.city}, state={self.state}, country={self.country}>"
+
+    def create():
+        pass
+
+    def delete():
+        pass
+
+    def get_all():
+        pass
+
+    def find_by_id():
+        pass
