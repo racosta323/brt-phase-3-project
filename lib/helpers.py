@@ -36,6 +36,7 @@ def menu():
 def user_menu():
     print("1. Enter a record of a location you've been to")
     print("2. Show locations I've been to.")
+    print("3. Show all locations (both my friends and me).")
     choice = input("> ")
     if choice == "1":
         create_trip()
@@ -75,9 +76,9 @@ def show_locations_menu():
     if choice == "1":
         travels_by_name()
     elif choice == "2":
-        pass
+        trips_by_country()
     elif choice == "3":
-        pass
+        trips_by_state()
     elif choice == "4":
         trips_by_stars()
     elif choice == "5":
@@ -97,10 +98,21 @@ def trips_by_stars():
     ipdb.set_trace()
     person.trips_by_stars(stars)
 
+def trips_by_country():
+    person = Traveler(traveler[0], 1, int(age_list[0]))
+    country = input("Enter name of country:> ")
+    person.trips_by_country(country)   
+
+def trips_by_state():
+    person = Traveler(traveler[0], 1, int(age_list[0]))
+    state = input("Enter the abbr. for the state:> ")
+    person.trips_by_state(state)    
+
 def show_all_loc_menu():
-    print("1. Sort by date of visit.")
-    print("2. Sort alphabetically by state.")
-    print("3. Sort alphabetically by country.")
+    print("1. Show all places I've been to")
+    print("2. Sort by date of visit.")
+    print("3. Sort alphabetically by state.")
+    print("4. Sort alphabetically by country.")
     choice = input("> ")
     if choice == 1:
         Trip.get_all_by_visit()
