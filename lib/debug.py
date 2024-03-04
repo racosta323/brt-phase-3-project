@@ -3,7 +3,7 @@
 from trip import Trip
 import datetime
 import ipdb
-from Traveler import Traveler
+from location import Location
 
 #datetime requires year,month,date: https://www.w3schools.com/python/python_datetime.asp
 
