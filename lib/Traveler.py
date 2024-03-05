@@ -1,9 +1,9 @@
-# traveler.py
 import ipdb
 
 from __init__ import CONN, CURSOR
 
 class Traveler:
+    
     all = {}
 
     @classmethod
@@ -11,8 +11,7 @@ class Traveler:
         sql = """
             CREATE TABLE IF NOT EXISTS travelers (
             id INTEGER PRIMARY KEY,
-            full_name TEXT,
-            traveler_id INTEGER,
+            name TEXT,
             age INTEGER
             )
         """
@@ -28,31 +27,30 @@ class Traveler:
         CONN.commit()
 
     @classmethod
-    def create_instance(cls, full_name, traveler_id, age):
-        instance = cls(full_name=full_name, traveler_id=traveler_id, age=age)
+    def create_instance(cls, name, age):
+        instance = cls(name, age)
         instance.save_to_db()
         return instance
 
     @classmethod
-    def find_by_id(cls, traveler_id):
+    def find_by_id(cls, id):
         sql = """
             SELECT * FROM travelers
             WHERE id = ?
         """
-        row = CURSOR.execute(sql, (traveler_id,)).fetchone()
+        row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
 
     @classmethod
     def instance_from_db(cls, row):
         traveler = cls.all.get(row[0])
         if traveler:
-            traveler.full_name = row[1]
-            traveler.traveler_id = row[2]
-            traveler.age = row[3]
+            traveler.name = row[1]
+            traveler.age = row[2]
             traveler.id = row[0]
             return traveler
         else:
-            new_traveler = cls(row[1], row[2], row[3], row[0])
+            new_traveler = cls(row[1], row[2], row[0])
             cls.all[new_traveler.id] = new_traveler
             return new_traveler
 
@@ -70,10 +68,10 @@ class Traveler:
 
     def save_to_db(self):
         sql = """
-            INSERT INTO travelers (full_name, traveler_id, age)
-            VALUES (?, ?, ?)
+            INSERT INTO travelers (name, age)
+            VALUES (?, ?)
         """
-        CURSOR.execute(sql, (self.full_name, self.traveler_id, self.age))
+        CURSOR.execute(sql, (self.name, self.age))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -81,10 +79,10 @@ class Traveler:
     def update_in_db(self):
         sql = """
             UPDATE travelers
-            SET full_name = ?, traveler_id = ?, age = ?
+            SET name = ?, age = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.full_name, self.traveler_id, self.age, self.id))
+        CURSOR.execute(sql, (self.name, self.age, self.id))
         CONN.commit()
 
     def delete_from_db(self):
@@ -94,12 +92,10 @@ class Traveler:
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
-
-        # also delete from dict
         del type(self).all[self.id]
         self.id = None
 
-    def __init__(self, name, traveler_id, age, id=None):
+    def __init__(self, name, age, id=None):
         self.name = name
         self.age = age
         self.id = id
@@ -109,35 +105,27 @@ class Traveler:
         return self._name
 
     @name.setter
-    def name(self, value):
-        if not isinstance(value, str):
-            raise ValueError("Full name must be a string.")
-        min_length = 2
-        max_length = 50
-        if not (min_length <= len(value) <= max_length):
-            raise ValueError(f"Full name must be between {min_length} and {max_length} characters.")
-        self._name = value
-
-    @property
-    def id(self):
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        self._id = value
+    def name(self, new_name):
+        if not isinstance(new_name, str):
+            raise TypeError("Name must be a string.")
+        if not (2 <= len(new_name) <= 50):
+            raise ValueError("Name must be between 2 and 50 characters.")
+        self._name = new_name
 
     @property
     def age(self):
         return self._age
 
     @age.setter
-    def age(self, value):
-        if value is not None:
-            if not isinstance(value, (int, float)):
-                raise ValueError("Age must be a number.")
-            if value < 0:
+    def age(self, new_age):
+        if new_age is not None:
+            if not isinstance(new_age, (int, float)):
+                raise TypeError("Age must be a number.")
+            if new_age < 0:
                 raise ValueError("Age cannot be negative.")
-        self._age = value
+            self._age = new_age
+        else:
+            raise ValueError("Age must be a non-zero number")
 
     def __repr__(self):
         return f"<name={self.name}, id={self.id}, age={self.age}>"

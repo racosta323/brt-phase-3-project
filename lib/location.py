@@ -1,6 +1,5 @@
 from __init__ import CONN, CURSOR
 
-
 class Location:
 
     # using faux data for now; later switch to empty dict

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # from trip import Trip
-from Traveler import Traveler
+from traveler import Traveler
 import datetime
 import ipdb
 from location import Location
