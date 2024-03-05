@@ -47,16 +47,7 @@ class Trip:
         ipdb.set_trace()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
     
-    #find by name when I link to traveler; needs work
-    # @classmethod
-    # def find_by_name(cls, name):
-    #     sql = """
-    #         SELECT * FROM trips
-    #         WHERE name = ?
-    #     """
-    #     row = CURSOR.execute(sql, (name,)).fetchone()
-    #     return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
-
+    
     @classmethod
     def instance_from_db(cls, row):
         trip = cls.all.get(row[0])

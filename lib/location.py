@@ -106,6 +106,16 @@ class Location:
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")    
 
+    @classmethod
+    def find_by_city(cls, city):
+        sql = """
+            SELECT * FROM locations
+            WHERE city = ?
+        """
+        row = CURSOR.execute(sql, (city,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
+
+
    ## attr methods     
 
     def __init__(self, city, state, country, id = None):

@@ -54,7 +54,6 @@ class Traveler:
     @classmethod
     def instance_from_db(cls, row):
         traveler = cls.all.get(row[0])
-        ipdb.set_trace()
         if traveler:
             traveler.name = row[1]
             traveler.age = row[2]
@@ -87,6 +86,16 @@ class Traveler:
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+
+    @classmethod
+    def find_by_name(cls, name):
+        sql = """
+            SELECT * FROM travelers
+            WHERE name = ?
+        """
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
+
 
     def update_in_db(self):
         sql = """

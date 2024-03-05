@@ -4,6 +4,7 @@ from trip import Trip
 from traveler import Traveler
 import ipdb
 from location import Location
+import helpers
 from __init__ import CONN, CURSOR
 
 # trip1 = Trip( "March", 2023)
@@ -20,4 +21,4 @@ tr1 = Traveler("Rene", 1, 35)
 
 # Trip.get_all_by_name("Rene")
 
-# ipdb.set_trace()
+ipdb.set_trace()

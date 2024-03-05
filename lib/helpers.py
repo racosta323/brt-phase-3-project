@@ -5,25 +5,28 @@ from location import Location
 from traveler import Traveler
 # from menus import menu
 
-traveler = {}
+travelers = {}
+name_list = []
 age_list = []
 traveler_id =""
 
 def greeting():
-    Traveler.get_all_from_db()
     print("Welcome! Enter your details to see menu options. (Enter 0 anytime to exit.)")
     name = input("What is your name? ")
     if name == "0":
         exit_program()
-    for traveler in Traveler.all:
-        if Traveler.all[traveler].name == name:
-            print("name is here")    
     age = int(input("How old are you? "))
     if age == "0":
         exit_program()
     print(f'Hello, {name}! Nice to meet you.')
-    traveler["name"] = name
-    traveler["age"] = age
+    try:
+        traveler = Traveler.find_by_name(name)
+        travelers[traveler.id] = traveler
+    except:
+        traveler = Traveler.create_instance(name,age)
+        travelers[traveler.id] = traveler
+    name_list.append(name)
+    age_list.append(age)    
     return name, age
         
 def exit_program():
@@ -32,16 +35,28 @@ def exit_program():
               
 def create_trip():
     Trip.create_table()    
-    city = input("What city have you been to? (Enter a location.)> ")
+    Traveler.get_all_from_db()
+    Trip.get_all_from_db()
+    Location.get_all_from_db()
+    city_input = input("What city have you been to? (Enter a location.)> ")
     state = input("In what state?> ")
     country = input("In what country?> ")
     stars = int(input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> "))
     year = int(input("What year did you go?> "))
     month = input("In what month?> ")
+    name = name_list[-1]
+    traveler = Traveler.find_by_name(name)
+    traveler_id = traveler.id
     try:
-        location = Location.create_instance(city, state, country)
-        trip = Trip.create_instance(month, year, stars, location.id, 1)
+        location = Location.find_by_city(city_input)
+        location_id = location.id
+    except:
+        location = Location.create_instance(city_input, state, country)
+        location_id = location.id
+    try:
+        trip = Trip.create_instance(month, year, stars, location_id, traveler_id)
         print("Cool. Thanks. Your entry has been recorded.")
+        return trip
         # menu()
     except Exception as exc:
         print("Error creating trip: ", exc)
@@ -102,4 +117,5 @@ def update_all():
 def all_sorted_by_visit():
     Trip.get_all_by_visit()
 
-ipdb.set_trace()      
+def check_for_name(name):
+    pass   
