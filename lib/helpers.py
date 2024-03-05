@@ -74,9 +74,8 @@ def trips_by_country():
     print([travel for travel in travels_by_name() if travel[3] == country])
 
 def trips_by_state():
-    person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
-    state = input("Enter the abbr. for the state:> ")
-    person.trips_by_state(state)
+    state = input("Enter state:> ")
+    print([travel for travel in travels_by_name() if travel[2] == state])
 
 def update_month():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
