@@ -67,12 +67,11 @@ def travels_by_name():
 
 def trips_by_stars():
     stars = input("Enter number of stars:> ")
-    return [travel for travel in travels_by_name() if travel[6] == int(stars)]
+    print([travel for travel in travels_by_name() if travel[6] == int(stars)])
 
 def trips_by_country():
-    person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
-    country = input("Enter name of country:> ")
-    person.trips_by_country(country)   
+    country = input("Enter country:> ")
+    print([travel for travel in travels_by_name() if travel[3] == country])
 
 def trips_by_state():
     person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
