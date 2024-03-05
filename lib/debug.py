@@ -4,12 +4,13 @@ from trip import Trip
 from traveler import Traveler
 import ipdb
 from location import Location
+import helpers
 from __init__ import CONN, CURSOR
 
 # trip1 = Trip( "March", 2023)
 
 # from traveler: def __init__(self, full_name, id, age):
-# tr1 = Traveler("Rene", 1, 35)
+tr1 = Traveler("Rene", 1, 35)
 # tr2 = Traveler("Keya", 2, 25)
 
 # l1 = Location("Johnsonville", "South Carolina", "United States", 2)

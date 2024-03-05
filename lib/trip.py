@@ -34,7 +34,7 @@ class Trip:
     @classmethod
     def create_instance(cls, month, year, stars, location_id, traveler_id):
         instance = cls(month, year, stars, location_id, traveler_id)
-        cls.save_to_table(instance)
+        cls.add_to_db(instance)
         return instance
     
     @classmethod
@@ -47,16 +47,7 @@ class Trip:
         ipdb.set_trace()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
     
-    #find by name when I link to traveler; needs work
-    # @classmethod
-    # def find_by_name(cls, name):
-    #     sql = """
-    #         SELECT * FROM trips
-    #         WHERE name = ?
-    #     """
-    #     row = CURSOR.execute(sql, (name,)).fetchone()
-    #     return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
-
+    
     @classmethod
     def instance_from_db(cls, row):
         trip = cls.all.get(row[0])
@@ -104,9 +95,13 @@ class Trip:
         """
         rows = CURSOR.execute(sql).fetchall()
         if rows:
-            print(rows)
+            return rows
         else:
             raise ValueError("Table does not have any data")
+        
+    def sort_by_name():
+        trips = Trip.get_all_by_visit()
+        pass   
 
     #this method probably shouldn't be in this class, but instead in the Traveler class
     #leaving temporarily to complete other methods, but may consider removing later
@@ -120,7 +115,8 @@ class Trip:
             raise Exception
          
 
-    def save_to_table(self):
+    def add_to_db(self):
+        Trip.create_table()
         sql = """
             INSERT INTO trips (month, year, stars, location_id, traveler_id)
             VALUES (?, ?, ?, ?, ?)
@@ -206,12 +202,12 @@ class Trip:
     @traveler_id.setter
     def traveler_id(self, new_id):
         from traveler import Traveler
+        Traveler.get_all_from_db()
         if new_id in Traveler.all:
             self._traveler_id = new_id
         else:
-            raise TypeError("ID must be associated with ID in traveler class")
+            raise TypeError("Traveler ID must be associated with ID in traveler class")
         
-
     @property
     def location_id(self):
         return self._location_id
@@ -219,10 +215,11 @@ class Trip:
     @location_id.setter
     def location_id(self, new_id):
         from location import Location
+        Location.get_all_from_db()
         if new_id in Location.all:
             self._location_id = new_id
         else:
-            raise TypeError("ID must be associated with ID in location class")        
+            raise TypeError("Location ID must be associated with ID in location class")        
         
     def __repr__(self):
         return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'

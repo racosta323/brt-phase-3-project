@@ -2,6 +2,8 @@ import ipdb
 
 from __init__ import CONN, CURSOR
 
+#copy class to rename
+
 class Traveler:
     
     all = {}
@@ -75,6 +77,7 @@ class Traveler:
             raise ValueError("Table does not have any data")  
 
     def add_to_db(self):
+        Traveler.create_table()
         sql = """
             INSERT INTO travelers (name, age)
             VALUES (?, ?)
@@ -83,6 +86,16 @@ class Traveler:
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+
+    @classmethod
+    def find_by_name(cls, name):
+        sql = """
+            SELECT * FROM travelers
+            WHERE name = ?
+        """
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
+
 
     def update_in_db(self):
         sql = """
