@@ -224,6 +224,30 @@ class Trip:
     def __repr__(self):
         return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'
     
+
+
+    def trips_by_stars(self, stars):
+        all_trips = self.get_all_travels_by_name()
+        print([trip for trip in all_trips if str(trip[6]) >= str(stars)])
+
+    def trips_by_country(self, country):
+        all_trips = self.get_all_travels_by_name()
+        for trip in all_trips:
+            if country == trip[3]:
+                print(trip)
+                return trip
+            else:
+                LookupError("No travels by this country")
+
+    def trips_by_state(self, state):
+        all_trips = self.get_all_travels_by_name()
+        for trip in all_trips:
+            if state == trip[2]:
+                print(trip)
+                return trip
+            else:
+                LookupError("No travels by this state")
+
     ## for testing
     @classmethod
     def reset(cls):

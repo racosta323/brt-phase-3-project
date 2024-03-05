@@ -63,12 +63,11 @@ def create_trip():
     
 def travels_by_name():    
     person_name = name_list[-1]
-    Traveler.get_all_travels_by_name(person_name)
+    return Traveler.get_all_travels_by_name(person_name)
 
 def trips_by_stars():
-    person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
     stars = input("Enter number of stars:> ")
-    person.trips_by_stars(stars)
+    return [travel for travel in travels_by_name() if travel[6] == int(stars)]
 
 def trips_by_country():
     person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
@@ -126,4 +125,4 @@ def older_friends():
     visits = all_friends_visits()
     
 
-ipdb.set_trace()
+# ipdb.set_trace()
