@@ -114,7 +114,7 @@ def update_all():
 
 def sort_by_state():
     trips = Trip.get_all_by_visit()
-    sorted_trips = sorted(trips)
+    sorted_trips = sorted(trips, key = lambda x: x[2])
     print(sorted_trips)
 
 def all_sorted_by_visit():

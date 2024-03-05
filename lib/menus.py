@@ -121,4 +121,4 @@ def user_trip_update():
         exit_program()
     elif choice == 4:
         pass
-        print("Invalid choice -- enter number corresponing to menu item")
+        print("Invalid choice -- enter number corresponding to menu item")
