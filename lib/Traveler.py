@@ -54,6 +54,7 @@ class Traveler:
     @classmethod
     def instance_from_db(cls, row):
         traveler = cls.all.get(row[0])
+        ipdb.set_trace()
         if traveler:
             traveler.name = row[1]
             traveler.age = row[2]

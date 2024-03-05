@@ -5,22 +5,25 @@ from location import Location
 from traveler import Traveler
 # from menus import menu
 
-traveler = []
+traveler = {}
 age_list = []
 traveler_id =""
 
 def greeting():
+    Traveler.get_all_from_db()
     print("Welcome! Enter your details to see menu options. (Enter 0 anytime to exit.)")
     name = input("What is your name? ")
     if name == "0":
         exit_program()
+    for traveler in Traveler.all:
+        if Traveler.all[traveler].name == name:
+            print("name is here")    
     age = int(input("How old are you? "))
     if age == "0":
         exit_program()
     print(f'Hello, {name}! Nice to meet you.')
-    Traveler.create_instance(name, age)
-    traveler.append(name)
-    age_list.append(age)
+    traveler["name"] = name
+    traveler["age"] = age
     return name, age
         
 def exit_program():
@@ -44,22 +47,22 @@ def create_trip():
         print("Error creating trip: ", exc)
     
 def travels_by_name():    
-    person = Traveler.create_instance(traveler[0], int(age_list[0]))
-    Traveler.get_all_travels_by_name(person)
+    person_name = traveler["name"]
+    Traveler.get_all_travels_by_name(person_name)
 
 def trips_by_stars():
-    person = Traveler.create_instance(traveler[0], int(age_list[0]))
+    person = Traveler.create_instance(traveler["name"], int(traveler["age"]))
     stars = input("Enter number of stars:> ")
     ipdb.set_trace()
     person.trips_by_stars(stars)
 
 def trips_by_country():
-    person = Traveler.create_instance(traveler[0], int(age_list[0]))
+    person = Traveler.create_instance(traveler["name"], int(traveler["age"]))
     country = input("Enter name of country:> ")
     person.trips_by_country(country)   
 
 def trips_by_state():
-    person = Traveler.create_instance(traveler[0], int(age_list[0]))
+    person = Traveler.create_instance(traveler["name"], int(traveler["age"]))
     state = input("Enter the abbr. for the state:> ")
     person.trips_by_state(state)
 
@@ -99,4 +102,4 @@ def update_all():
 def all_sorted_by_visit():
     Trip.get_all_by_visit()
 
-      
+ipdb.set_trace()      
