@@ -78,10 +78,22 @@ def update_year():
     trip.update_row()
 
 def update_stars():
-    pass
+    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    stars = input("How many stars would you like to update to?> ")
+    trip = Trip.find_by_id(trip_id)
+    trip.stars = stars
+    trip.update_row()
 
 def update_all():
-    pass
+    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    month = input("What month would you like to update to?> ")
+    year = input("What year would you like to update to?> ")
+    stars = input("How many stars would you like to update to?> ")
+    trip = Trip.find_by_id(trip_id)
+    trip.month = month
+    trip.year = year
+    trip.stars = stars
+    trip.update_row()
     
 
       
