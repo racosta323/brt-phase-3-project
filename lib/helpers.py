@@ -68,7 +68,10 @@ def trips_by_state():
 def update_user_trip():
     person = Traveler(traveler[0], 1, int(age_list[0]))
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
-    print("What do you want to update?")
+    month = input("What month would you like to update to?> ")
+    trip = Trip.find_by_id(trip_id)
+    trip.month = month
+    trip.update_row()
     
 
       

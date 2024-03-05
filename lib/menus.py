@@ -4,7 +4,8 @@ from helpers import (
     travels_by_name,
     trips_by_country,
     trips_by_stars,
-    trips_by_state
+    trips_by_state,
+    update_user_trip
 )
 
 def menu():
@@ -46,7 +47,7 @@ def show_locations_menu():
     elif choice == "4":
         trips_by_stars()
     elif choice == "5":
-        pass
+        user_trip_update()
     elif choice == "0":
         exit_program()
     else:
@@ -80,14 +81,17 @@ def user_trip_update():
     print("1. Update month")
     print("2. Update year")
     print("3. Update stars")
+    print("4. Update all")
     choice = input("> ")
     if choice == 1:
-        pass
+        update_user_trip()
     elif choice == 2:
         pass
     elif choice == 3:
         pass
     elif choice == 0: 
         exit_program()
+    elif choice == 4:
+        pass
     else:
         print("Invalid choice -- enter number corresponing to menu item")              
