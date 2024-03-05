@@ -18,7 +18,7 @@ def greeting():
     if age == "0":
         exit_program()
     print(f'Hello, {name}! Nice to meet you.')
-    #add to travelers db (pending)
+    Traveler.create_instance(name, age)
     traveler.append(name)
     age_list.append(age)
     return name, age
@@ -36,9 +36,7 @@ def create_trip():
     year = int(input("What year did you go?> "))
     month = input("In what month?> ")
     try:
-        location = Location(city, state, country, 1)
-        tr1 = Traveler("Rene", 1, 35)
-        tr2 = Traveler("Keya", 2, 25)
+        location = Location.create_instance(city, state, country)
         trip = Trip.create_instance(month, year, stars, location.id, 1)
         print("Cool. Thanks. Your entry has been recorded.")
         # menu()
