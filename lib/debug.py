@@ -2,15 +2,11 @@
 
 # from trip import Trip
 from traveler import Traveler
-import datetime
 import ipdb
 from location import Location
 from __init__ import CONN, CURSOR
 
-#datetime requires year,month,date: https://www.w3schools.com/python/python_datetime.asp
-
 # trip1 = Trip( "March", 2023)
-
 
 # from traveler: def __init__(self, full_name, id, age):
 # tr1 = Traveler("Rene", 1, 35)

@@ -2,7 +2,6 @@ from __init__ import CONN, CURSOR
 
 class Location:
 
-    # using faux data for now; later switch to empty dict
     all = {}
 
     ## for testing
@@ -124,7 +123,6 @@ class Location:
         self.country = country
         self.id = id
         
-
     @property
     def city(self):
         return self._city

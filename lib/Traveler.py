@@ -6,6 +6,14 @@ class Traveler:
     
     all = {}
 
+    ## for testing
+    @classmethod
+    def reset(cls):
+        cls.all = {}
+        cls.drop_table()
+        cls.create_table()
+    ##
+
     @classmethod
     def create_table(cls):
         sql = """
@@ -29,7 +37,7 @@ class Traveler:
     @classmethod
     def create_instance(cls, name, age):
         instance = cls(name, age)
-        instance.save_to_db()
+        instance.add_to_db()
         return instance
 
     @classmethod
@@ -66,12 +74,12 @@ class Traveler:
         else:
             raise ValueError("Table does not have any data")  
 
-    def save_to_db(self):
+    def add_to_db(self):
         sql = """
             INSERT INTO travelers (name, age)
             VALUES (?, ?)
         """
-        CURSOR.execute(sql, (self.name, self.age))
+        CURSOR.execute(sql, (self.name, self.age,))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -82,7 +90,7 @@ class Traveler:
             SET name = ?, age = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.name, self.age, self.id))
+        CURSOR.execute(sql, (self.name, self.age, self.id,))
         CONN.commit()
 
     def delete_from_db(self):
