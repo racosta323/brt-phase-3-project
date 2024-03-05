@@ -80,10 +80,27 @@ def show_all_loc_menu():
         print("Invalid choice -- enter number corresponding to menu item") 
 
 def friends_menu():
-    print("Where have your friends been? THIS WILL GIVE ALL (minus you).")
-    print("Where have friends older than you been?")
-    print("Where have friends younger than you been?")
-    print("How many friends have been to where I've been?")   
+    print("1. Where have your friends been? THIS WILL GIVE ALL (minus you).")
+    print("2. Where have friends older than you been?")
+    print("3. Where have friends younger than you been?")
+    print("4. How many friends have been to where I've been?")
+    choice = input("> ")
+    if choice == 1:
+        #all friends
+        pass
+    elif choice == 2:
+        #older friends
+        pass
+    elif choice == 3:
+        #younger friends
+        pass
+    elif choice == 4:
+        #same places
+        pass
+    elif choice == 0:
+        exit_program()
+    else:
+        print("Invalid choice -- enter number corresponding to the menu item")
 
 def user_trip_update():
     print("1. Update month")
