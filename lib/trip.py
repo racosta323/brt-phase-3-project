@@ -84,9 +84,6 @@ class Trip:
             return list_of_rows
         else:
             raise ValueError("Table does not have any data")  
-    
-   
-        
 
     #this method probably shouldn't be in this class, but instead in the Traveler class
     #leaving temporarily to complete other methods, but may consider removing later

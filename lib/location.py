@@ -6,13 +6,13 @@ class Location:
     # using faux data for now; later switch to empty dict
     all = {}
 
-    def __init__(self, city, state, country, id=None):
-        self.city = city
-        self.state = state
-        self.country = country
-        self.id = id
-        # added temporarily
-        Location.all[self.id] = self
+    ## for testing
+    @classmethod
+    def reset(cls):
+        cls.all = {}
+        cls.drop_table()
+        cls.create_table()
+    ##
 
     @classmethod
     def create_table(cls):
@@ -34,6 +34,97 @@ class Location:
         """
         CURSOR.execute(sql)
         CONN.commit()
+
+    def save_to_table(self):
+        sql = """
+            INSERT INTO locations (city, state, country)
+            VALUES (?, ?, ?)
+        """    
+        CURSOR.execute(sql, (self.city, self.state, self.country,))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
+
+    @classmethod
+    def create_instance(cls, city, state, country):
+        instance = cls(city, state, country)
+        cls.save_to_table(instance)    
+        return instance
+    
+    @classmethod
+    def instance_from_db(cls, row):
+        location = cls.all.get(row[0])
+        if location:
+            location.city = row[1]
+            location.state = row[2]
+            location.country = row[3]
+            location.id = row[0]
+            return location
+        else:
+            new_location = cls(row[1], row[2], row[3], row[0])
+            cls.all[new_location.id] = new_location
+            return new_location
+        
+    @classmethod
+    def get_all_from_db(cls):
+        sql = """
+            SELECT * FROM locations;
+        """  
+        rows = CURSOR.execute(sql).fetchall()
+        row_list = [cls.instance_from_db(row) for row in rows]
+        if row_list:
+            return row_list
+        else:
+            raise ValueError("Table does not have any data")
+
+    ## sql/attr methods
+
+    def save_to_table(self):
+        sql = """
+            INSERT INTO locations (city, state, country)
+            VALUES (?, ?, ?)
+        """
+        CURSOR.execute(sql, (self.city, self.state, self.country))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
+
+    def update_row(self):
+        sql = """
+            UPDATE locations
+            SET city = ?, state = ?, country = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.city, self.state, self.country))
+        CONN.commit()
+
+    def destroy(self):
+        sql = """
+            DELETE FROM trips
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+        del type(self).all[self.id]
+        self.id = None
+
+    @classmethod
+    def find_by_id(cls, id):
+        sql = """
+            SELECT * FROM locations
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")    
+
+   ## attr methods     
+
+    def __init__(self, city, state, country, id = None):
+        self.city = city
+        self.state = state
+        self.country = country
+        self.id = id
+        
 
     @property
     def city(self):
@@ -70,15 +161,3 @@ class Location:
 
     def __repr__(self):
         return f"<Location_id {self.id}: city ={self.city}, state={self.state}, country={self.country}>"
-
-    def create():
-        pass
-
-    def delete():
-        pass
-
-    def get_all():
-        pass
-
-    def find_by_id():
-        pass
