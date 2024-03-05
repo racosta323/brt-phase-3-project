@@ -32,7 +32,7 @@ def user_menu():
     elif choice == "0":
         exit_program()
     else:
-        print("Invalid choice -- enter number corresponding to menu item")     
+        print("Invalid choice -- enter number corresponding to menu item")
 
 def show_locations_menu():
     print("1. Show all locations I've been to.")
@@ -57,15 +57,14 @@ def show_locations_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_all_loc_menu():
-    print("1. Show all places I've been to")
+    #print("1. Show all places I've been to")
     print("2. Sort by date of visit.")
     print("3. Sort alphabetically by state.")
     print("4. Sort alphabetically by country.")
     choice = input("> ")
     if choice == 1:
-        pass
-        # from trip import Trip
-        # Trip.get_all_by_visit()
+        from trip import Trip
+        Trip.get_all_by_visit()
     elif choice == 2:
         pass
     elif choice == 3:
@@ -75,13 +74,13 @@ def show_all_loc_menu():
     elif choice == 0:
         exit_program()
     else:
-        print("Invalid choice -- enter number corresponding to menu item") 
+        print("Invalid choice -- enter number corresponding to menu item")
 
 def friends_menu():
     print("Where have your friends been? THIS WILL GIVE ALL.")
     print("Where have friends older than you been?")
     print("Where have friends younger than you been?")
-    print("How many friends have been to where I've been?")   
+    print("How many friends have been to where I've been?")
 
 def user_trip_update():
     print("1. Update month")
@@ -97,9 +96,9 @@ def user_trip_update():
         update_stars()
     elif choice == 4:
         update_all()
-    elif choice == 0: 
+    elif choice == 0:
         exit_program()
     elif choice == 4:
         pass
     else:
-        print("Invalid choice -- enter number corresponing to menu item")              
+        print("Invalid choice -- enter number corresponing to menu item")

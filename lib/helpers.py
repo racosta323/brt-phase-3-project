@@ -22,13 +22,13 @@ def greeting():
     traveler.append(name)
     age_list.append(age)
     return name, age
-        
+
 def exit_program():
     print("Until next time, Traveler!")
     exit()
-              
+
 def create_trip():
-    Trip.create_table()    
+    Trip.create_table()
     city = input("What city have you been to? (Enter a location.)> ")
     state = input("In what state?> ")
     country = input("In what country?> ")
@@ -42,8 +42,8 @@ def create_trip():
         # menu()
     except Exception as exc:
         print("Error creating trip: ", exc)
-    
-def travels_by_name():    
+
+def travels_by_name():
     person = Traveler.create_instance(traveler[0], int(age_list[0]))
     Traveler.get_all_travels_by_name(person)
 
@@ -56,7 +56,7 @@ def trips_by_stars():
 def trips_by_country():
     person = Traveler.create_instance(traveler[0], int(age_list[0]))
     country = input("Enter name of country:> ")
-    person.trips_by_country(country)   
+    person.trips_by_country(country)
 
 def trips_by_state():
     person = Traveler.create_instance(traveler[0], int(age_list[0]))
@@ -94,6 +94,10 @@ def update_all():
     trip.year = year
     trip.stars = stars
     trip.update_row()
-    
 
-      
+def sort_by_state():
+    trips = Trip.get_all_by_visit()
+    sorted_trips = sorted(trips)
+    print(sorted_trips)
+
+#ipdb.set_trace()
