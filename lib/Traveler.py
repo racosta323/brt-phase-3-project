@@ -1,12 +1,18 @@
-# traveler.py
-#remove traveler_id from attributes -- this will be the 'id' for this class
-
 import ipdb
 
 from __init__ import CONN, CURSOR
 
 class Traveler:
+    
     all = {}
+
+    ## for testing
+    @classmethod
+    def reset(cls):
+        cls.all = {}
+        cls.drop_table()
+        cls.create_table()
+    ##
 
     @classmethod
     def create_table(cls):
@@ -31,7 +37,7 @@ class Traveler:
     @classmethod
     def create_instance(cls, name, age):
         instance = cls(name, age)
-        instance.save_to_db()
+        instance.add_to_db()
         return instance
 
     @classmethod
@@ -68,12 +74,12 @@ class Traveler:
         else:
             raise ValueError("Table does not have any data")  
 
-    def save_to_db(self):
+    def add_to_db(self):
         sql = """
             INSERT INTO travelers (name, age)
             VALUES (?, ?)
         """
-        CURSOR.execute(sql, (self.name, self.age))
+        CURSOR.execute(sql, (self.name, self.age,))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
@@ -81,10 +87,10 @@ class Traveler:
     def update_in_db(self):
         sql = """
             UPDATE travelers
-            SET name = ?, traveler_id = ?, age = ?
+            SET name = ?, age = ?
             WHERE id = ?
         """        
-        CURSOR.execute(sql, (self.name, self.age, self.id))
+        CURSOR.execute(sql, (self.name, self.age, self.id,))
         CONN.commit()
 
     def delete_from_db(self):
@@ -94,8 +100,6 @@ class Traveler:
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
-
-        # also delete from dict
         del type(self).all[self.id]
         self.id = None
 
@@ -109,35 +113,27 @@ class Traveler:
         return self._name
 
     @name.setter
-    def name(self, value):
-        if not isinstance(value, str):
-            raise ValueError("Full name must be a string.")
-        min_length = 2
-        max_length = 50
-        if not (min_length <= len(value) <= max_length):
-            raise ValueError(f"Full name must be between {min_length} and {max_length} characters.")
-        self._name = value
-
-    @property
-    def id(self):
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        self._id = value
+    def name(self, new_name):
+        if not isinstance(new_name, str):
+            raise TypeError("Name must be a string.")
+        if not (2 <= len(new_name) <= 50):
+            raise ValueError("Name must be between 2 and 50 characters.")
+        self._name = new_name
 
     @property
     def age(self):
         return self._age
 
     @age.setter
-    def age(self, value):
-        if value is not None:
-            if not isinstance(value, (int, float)):
-                raise ValueError("Age must be a number.")
-            if value < 0:
+    def age(self, new_age):
+        if new_age is not None:
+            if not isinstance(new_age, (int, float)):
+                raise TypeError("Age must be a number.")
+            if new_age < 0:
                 raise ValueError("Age cannot be negative.")
-        self._age = value
+            self._age = new_age
+        else:
+            raise ValueError("Age must be a non-zero number")
 
     def __repr__(self):
         return f"<name={self.name}, id={self.id}, age={self.age}>"
