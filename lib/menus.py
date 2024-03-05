@@ -63,11 +63,14 @@ def show_all_loc_menu():
     print("4. Sort alphabetically by country.")
     choice = input("> ")
     if choice == 1:
-        from trip import Trip
-        Trip.get_all_by_visit()
+        pass
+        # from trip import Trip
+        # Trip.get_all_by_visit()
     elif choice == 2:
         pass
     elif choice == 3:
+        pass
+    elif choice == 4:
         pass
     elif choice == 0:
         exit_program()

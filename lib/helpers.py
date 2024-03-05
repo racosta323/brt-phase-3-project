@@ -14,7 +14,7 @@ def greeting():
     name = input("What is your name? ")
     if name == "0":
         exit_program()
-    age = input("How old are you? ")
+    age = int(input("How old are you? "))
     if age == "0":
         exit_program()
     print(f'Hello, {name}! Nice to meet you.')
