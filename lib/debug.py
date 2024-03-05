@@ -16,8 +16,8 @@ from __init__ import CONN, CURSOR
 # tr1 = Traveler("Rene", 1, 35)
 # tr2 = Traveler("Keya", 2, 25)
 
-l1 = Location("Johnsonville", "South Carolina", "United States", 2)
-l2 = Location("Austin", "TX", "US", 1)
+# l1 = Location("Johnsonville", "South Carolina", "United States", 2)
+# l2 = Location("Austin", "TX", "US", 1)
 
 # trip1 = Trip.create_instance("March", 2020, 2, 1, 2)
 # trip2 = Trip.create_instance("April", 2019, 2, 2, 1)

@@ -46,7 +46,7 @@ class Location:
         type(self).all[self.id] = self
 
     @classmethod
-    def create_instance(cls,city, state, country):
+    def create_instance(cls, city, state, country):
         instance = cls(city, state, country)
         cls.save_to_table(instance)    
         return instance
@@ -101,12 +101,21 @@ class Location:
     def destroy(self):
         sql = """
             DELETE FROM trips
-            WEHRE id = ?
+            WHERE id = ?
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
         del type(self).all[self.id]
         self.id = None
+
+    @classmethod
+    def find_by_id(cls, id):
+        sql = """
+            SELECT * FROM locations
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")    
 
    ## attr methods     
 
@@ -116,7 +125,6 @@ class Location:
         self.country = country
         self.id = id
         #added temporarily
-        Location.all[self.id] = self
 
     @property
     def city(self):
