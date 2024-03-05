@@ -2,6 +2,8 @@ import ipdb
 
 from __init__ import CONN, CURSOR
 
+#copy class to rename
+
 class Traveler:
     
     all = {}
@@ -75,6 +77,7 @@ class Traveler:
             raise ValueError("Table does not have any data")  
 
     def add_to_db(self):
+        Traveler.create_table()
         sql = """
             INSERT INTO travelers (name, age)
             VALUES (?, ?)

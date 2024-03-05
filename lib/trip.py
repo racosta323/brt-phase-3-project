@@ -34,7 +34,7 @@ class Trip:
     @classmethod
     def create_instance(cls, month, year, stars, location_id, traveler_id):
         instance = cls(month, year, stars, location_id, traveler_id)
-        cls.save_to_table(instance)
+        cls.add_to_db(instance)
         return instance
     
     @classmethod
@@ -87,26 +87,30 @@ class Trip:
     
     @classmethod
     def get_all_by_visit(cls):
-        sql = """
-            SELECT travelers.name,
-            locations.city,
-            locations.state,
-            locations.country,
-            trips.month,
-            trips.year,
-            trips.stars 
-            FROM trips
-            JOIN travelers
-            ON trips.traveler_id = travelers.id
-            JOIN locations
-            ON trips.location_id = locations.id
-            ORDER BY year, month
-        """
-        rows = CURSOR.execute(sql).fetchall()
-        if rows:
-            print(rows)
-        else:
-            raise ValueError("Table does not have any data")
+        all = cls.get_all_from_db()
+
+    # @classmethod
+    # def get_all_by_visit(cls):
+    #     sql = """
+    #         SELECT travelers.name,
+    #         locations.city,
+    #         locations.state,
+    #         locations.country,
+    #         trips.month,
+    #         trips.year,
+    #         trips.stars 
+    #         FROM trips
+    #         JOIN travelers
+    #         ON trips.traveler_id = travelers.id
+    #         JOIN locations
+    #         ON trips.location_id = locations.id
+    #         ORDER BY year, month
+    #     """
+    #     rows = CURSOR.execute(sql).fetchall()
+    #     if rows:
+    #         print(rows)
+    #     else:
+    #         raise ValueError("Table does not have any data")
 
     #this method probably shouldn't be in this class, but instead in the Traveler class
     #leaving temporarily to complete other methods, but may consider removing later
@@ -120,7 +124,8 @@ class Trip:
             raise Exception
          
 
-    def save_to_table(self):
+    def add_to_db(self):
+        Trip.create_table()
         sql = """
             INSERT INTO trips (month, year, stars, location_id, traveler_id)
             VALUES (?, ?, ?, ?, ?)

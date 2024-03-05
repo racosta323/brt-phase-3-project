@@ -96,4 +96,7 @@ def update_all():
     trip.update_row()
     
 
+def all_sorted_by_visit():
+    Trip.get_all_by_visit()
+
       

@@ -33,20 +33,10 @@ class Location:
         CURSOR.execute(sql)
         CONN.commit()
 
-    def save_to_table(self):
-        sql = """
-            INSERT INTO locations (city, state, country)
-            VALUES (?, ?, ?)
-        """    
-        CURSOR.execute(sql, (self.city, self.state, self.country,))
-        CONN.commit()
-        self.id = CURSOR.lastrowid
-        type(self).all[self.id] = self
-
     @classmethod
     def create_instance(cls, city, state, country):
         instance = cls(city, state, country)
-        cls.save_to_table(instance)    
+        cls.add_to_db(instance)    
         return instance
     
     @classmethod
@@ -77,7 +67,8 @@ class Location:
 
     ## sql/attr methods
 
-    def save_to_table(self):
+    def add_to_db(self):
+        Location.create_table()
         sql = """
             INSERT INTO locations (city, state, country)
             VALUES (?, ?, ?)

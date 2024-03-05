@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# from trip import Trip
+from trip import Trip
 from traveler import Traveler
 import ipdb
 from location import Location
