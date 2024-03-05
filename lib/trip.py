@@ -95,7 +95,7 @@ class Trip:
         """
         rows = CURSOR.execute(sql).fetchall()
         if rows:
-            print(rows)
+            return rows
         else:
             raise ValueError("Table does not have any data")
         

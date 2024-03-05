@@ -62,22 +62,21 @@ def create_trip():
         print("Error creating trip: ", exc)
     
 def travels_by_name():    
-    person_name = traveler["name"]
+    person_name = name_list[-1]
     Traveler.get_all_travels_by_name(person_name)
 
 def trips_by_stars():
-    person = Traveler.create_instance(traveler["name"], int(traveler["age"]))
+    person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
     stars = input("Enter number of stars:> ")
-    ipdb.set_trace()
     person.trips_by_stars(stars)
 
 def trips_by_country():
-    person = Traveler.create_instance(traveler["name"], int(traveler["age"]))
+    person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
     country = input("Enter name of country:> ")
     person.trips_by_country(country)   
 
 def trips_by_state():
-    person = Traveler.create_instance(traveler["name"], int(traveler["age"]))
+    person = Traveler.create_instance(name_list[-1], int(age_list[-1]))
     state = input("Enter the abbr. for the state:> ")
     person.trips_by_state(state)
 
@@ -117,5 +116,10 @@ def update_all():
 def all_sorted_by_visit():
     Trip.get_all_by_visit()
 
-def check_for_name(name):
-    pass   
+def all_friends_visits():
+    person_name = name_list[-1]
+    visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != person_name]
+    print(visits) 
+    # return visits
+
+ipdb.set_trace()

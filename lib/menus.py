@@ -8,7 +8,8 @@ from helpers import (
     update_month,
     update_year,
     update_stars,
-    update_all
+    update_all,
+    all_friends_visits
 )
 
 def menu():
@@ -85,19 +86,19 @@ def friends_menu():
     print("3. Where have friends younger than you been?")
     print("4. How many friends have been to where I've been?")
     choice = input("> ")
-    if choice == 1:
-        #all friends
+    if choice == "1":
+        all_friends_visits()
         pass
-    elif choice == 2:
+    elif choice == "2":
         #older friends
         pass
-    elif choice == 3:
+    elif choice == "3":
         #younger friends
         pass
-    elif choice == 4:
+    elif choice == "4":
         #same places
         pass
-    elif choice == 0:
+    elif choice == "0":
         exit_program()
     else:
         print("Invalid choice -- enter number corresponding to the menu item")
