@@ -44,32 +44,44 @@ def create_trip():
         print("Error creating trip: ", exc)
     
 def travels_by_name():    
-    person = Traveler(traveler[0], 1, int(age_list[0]))
+    person = Traveler.create_instance(traveler[0], int(age_list[0]))
     Traveler.get_all_travels_by_name(person)
 
 def trips_by_stars():
-    person = Traveler(traveler[0], 1, int(age_list[0]))
+    person = Traveler.create_instance(traveler[0], int(age_list[0]))
     stars = input("Enter number of stars:> ")
     ipdb.set_trace()
     person.trips_by_stars(stars)
 
 def trips_by_country():
-    person = Traveler(traveler[0], 1, int(age_list[0]))
+    person = Traveler.create_instance(traveler[0], int(age_list[0]))
     country = input("Enter name of country:> ")
     person.trips_by_country(country)   
 
 def trips_by_state():
-    person = Traveler(traveler[0], 1, int(age_list[0]))
+    person = Traveler.create_instance(traveler[0], int(age_list[0]))
     state = input("Enter the abbr. for the state:> ")
     person.trips_by_state(state)
 
-def update_user_trip():
-    person = Traveler(traveler[0], 1, int(age_list[0]))
+def update_month():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
     month = input("What month would you like to update to?> ")
     trip = Trip.find_by_id(trip_id)
     trip.month = month
     trip.update_row()
+
+def update_year():
+    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    year = input("What year would you like to update to?> ")
+    trip = Trip.find_by_id(trip_id)
+    trip.year = year
+    trip.update_row()
+
+def update_stars():
+    pass
+
+def update_all():
+    pass
     
 
       

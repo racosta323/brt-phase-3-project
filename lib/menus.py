@@ -5,7 +5,10 @@ from helpers import (
     trips_by_country,
     trips_by_stars,
     trips_by_state,
-    update_user_trip
+    update_month,
+    update_year,
+    update_stars,
+    update_all
 )
 
 def menu():
@@ -84,11 +87,13 @@ def user_trip_update():
     print("4. Update all")
     choice = input("> ")
     if choice == 1:
-        update_user_trip()
+        update_month()
     elif choice == 2:
-        pass
+        update_year()
     elif choice == 3:
-        pass
+        update_stars()
+    elif choice == 4:
+        update_all()
     elif choice == 0: 
         exit_program()
     elif choice == 4:
