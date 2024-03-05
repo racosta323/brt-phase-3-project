@@ -120,6 +120,10 @@ def all_friends_visits():
     person_name = name_list[-1]
     visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != person_name]
     print(visits) 
-    # return visits
+    return visits
+
+def older_friends():
+    visits = all_friends_visits()
+    
 
 ipdb.set_trace()
