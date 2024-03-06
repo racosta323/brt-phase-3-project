@@ -114,10 +114,29 @@ def remove():
     trip = Trip.find_by_id(trip_id)
     trip.destroy()    
 
+def sort_by_year():
+    trips = Trip.get_all_by_visit()
+    sorted_trips = sorted(trips, key = lambda x: x[5])
+    print(sorted_trips)
+    return sorted_trips
+
+def sort_by_name():
+    trips = Trip.get_all_by_visit()
+    sorted_trips = sorted(trips, key = lambda x: x[0])
+    print(sorted_trips)
+    return sorted_trips
+
 def sort_by_state():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[2])
     print(sorted_trips)
+    return sorted_trips
+
+def sort_by_country():
+    trips = Trip.get_all_by_visit()
+    sorted_trips = sorted(trips, key = lambda x: x[3])
+    print(sorted_trips)
+    return sorted_trips
 
 def all_sorted_by_visit():
     Trip.get_all_by_visit()
