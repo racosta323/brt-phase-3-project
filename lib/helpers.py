@@ -16,7 +16,7 @@ def greeting():
     if name == "0":
         exit_program()
     age = int(input("How old are you? "))
-    if age == "0":
+    if age == 0:
         exit_program()
     print(f'Hello, {name}! Nice to meet you.')
     try:
@@ -35,9 +35,12 @@ def exit_program():
 
 def create_trip():
     Trip.create_table()
-    Traveler.get_all_from_db()
-    Trip.get_all_from_db()
-    Location.get_all_from_db()
+    try:
+        Traveler.get_all_from_db()
+        Trip.get_all_from_db()
+        Location.get_all_from_db()
+    except:
+        pass
     city_input = input("What city have you been to? (Enter a location.)> ")
     state = input("In what state?> ")
     country = input("In what country?> ")
