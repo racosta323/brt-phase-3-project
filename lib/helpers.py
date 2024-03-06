@@ -71,11 +71,13 @@ def my_travels():
 def update_name():
     name = name_list[-1]
     traveler = Traveler.find_by_name(name)
-    updated_name = input("Enter your updated name:> ")
-    updated_age = input("Enter your updated age:> ")
+    age = traveler.age
+    updated_name = input(f"Your name is currently {name}. \n Enter your updated name:> ")
+    updated_age = int(input(f"Your age is currently {age}. \n Enter your updated age:> "))
     traveler.name = updated_name
     traveler.age = updated_age
     traveler.update_row()
+    print(f"Your name has updated to:{traveler.name} \n and your age has updated to: {traveler.age} has been recorded.")
 
 def trips_by_stars():
     stars = input("Enter number of stars:> ")
@@ -182,4 +184,4 @@ def reset_all():
 #         if travel[1] in :
     
 
-ipdb.set_trace()
+# ipdb.set_trace()
