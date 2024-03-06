@@ -6,7 +6,8 @@ from helpers import (
 from menus import (
     menu,
     user_menu,
-    friends_menu
+    friends_menu,
+    show_all_loc_menu
 )
 
 def main():
@@ -21,7 +22,7 @@ def main():
     elif choice == "2":
         friends_menu()
     elif choice == "3":
-        pass
+        show_all_loc_menu()
     else:
         print("Invalid choice -- enter number corresponding to menu item")
 
