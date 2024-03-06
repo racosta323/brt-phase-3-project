@@ -9,7 +9,9 @@ from helpers import (
     update_year,
     update_stars,
     update_all,
-    all_friends_visits
+    all_friends_visits,
+    older_friends,
+    younger_friends
 )
 
 def menu():
@@ -90,10 +92,9 @@ def friends_menu():
         all_friends_visits()
         pass
     elif choice == "2":
-        #older friends
-        pass
+        older_friends()
     elif choice == "3":
-        #younger friends
+        younger_friends()
         pass
     elif choice == "4":
         #same places

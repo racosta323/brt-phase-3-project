@@ -123,8 +123,29 @@ class Trip:
         else:
             raise ValueError("Table does not have any data")        
 
-
-
+    @classmethod
+    def younger_friends(cls, age):
+        sql = """
+            SELECT travelers.name,
+            locations.city,
+            locations.state,
+            locations.country,
+            trips.month,
+            trips.year,
+            trips.stars 
+            FROM trips
+            JOIN travelers
+            ON trips.traveler_id = travelers.id
+            JOIN locations
+            ON trips.location_id = locations.id
+            WHERE travelers.age < ?
+            ORDER BY year, month
+        """
+        rows = CURSOR.execute(sql, (age,)).fetchall()
+        if rows:
+            return rows
+        else:
+            raise ValueError("Table does not have any data") 
 
     def sort_by_name():
         trips = Trip.get_all_by_visit()
