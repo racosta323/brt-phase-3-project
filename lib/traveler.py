@@ -97,7 +97,7 @@ class Traveler:
         return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
 
 
-    def update_in_db(self):
+    def update_row(self):
         sql = """
             UPDATE travelers
             SET name = ?, age = ?

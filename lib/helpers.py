@@ -62,11 +62,20 @@ def create_trip():
         print("Error creating trip: ", exc)
     
 def my_travels():    
-    person_name = name_list[-1]
+    name = name_list[-1]
     try:
-        Traveler.get_all_travels_by_name(person_name)
+        Traveler.get_all_travels_by_name(name)
     except:
         "No data - enter a location first"
+
+def update_name():
+    name = name_list[-1]
+    traveler = Traveler.find_by_name(name)
+    updated_name = input("Enter your updated name:> ")
+    updated_age = input("Enter your updated age:> ")
+    traveler.name = updated_name
+    traveler.age = updated_age
+    traveler.update_row()
 
 def trips_by_stars():
     stars = input("Enter number of stars:> ")
@@ -145,20 +154,20 @@ def all_sorted_by_visit():
     Trip.get_all_by_visit()
 
 def all_friends_visits():
-    person_name = name_list[-1]
-    visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != person_name]
+    name = name_list[-1]
+    visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != name]
     return visits
 
 def older_friends():
-    person_name = name_list[-1]
+    name = name_list[-1]
     age = age_list[-1]
-    visits = [trip for trip in Trip.older_friends(age) if trip[0] != person_name]
+    visits = [trip for trip in Trip.older_friends(age) if trip[0] != name]
     return visits
 
 def younger_friends():
-    person_name = name_list[-1]
+    name = name_list[-1]
     age = age_list[-1]
-    visits = [trip for trip in Trip.younger_friends(age) if trip[0] != person_name]
+    visits = [trip for trip in Trip.younger_friends(age) if trip[0] != name]
     return visits
     
 def reset_all():

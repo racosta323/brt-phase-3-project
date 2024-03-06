@@ -25,7 +25,7 @@ def menu():
     print("1. Where have you been?")
     print("2. Where have your friends been?")
     print("3. Show all travels (you and friends)")
-    print("4. Update your name.")
+    print("4. Update your name and age.")
     choice = input("> ")
     if choice == "0":
         exit_program()
