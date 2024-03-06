@@ -16,7 +16,8 @@ from helpers import (
     sort_by_year,
     sort_by_name,
     sort_by_state,
-    sort_by_country
+    sort_by_country,
+    update_name
 )
 
 def menu():
@@ -36,7 +37,7 @@ def menu():
     elif choice == "3":
         show_all_loc_menu()
     elif choice == "4":
-        pass
+        update_name()
     else:
         print("Invalid choice -- enter number corresponding to menu item")
 
