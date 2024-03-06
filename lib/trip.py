@@ -101,6 +101,7 @@ class Trip:
         """
         rows = CURSOR.execute(sql).fetchall()
         if rows:
+            results = [f"(NAME: {result[0]}, CITY: {result[1]}, STATE: {result[2]}, COUNTRY: {result[3]}, MONTH: {result[4]}, YEAR: {result[5]}, STARS GIVEN: {result[6]})" for result in rows]
             return rows
         else:
             raise ValueError("Table does not have any data")

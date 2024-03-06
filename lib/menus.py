@@ -18,7 +18,8 @@ from helpers import (
     sort_by_state,
     sort_by_country,
     update_name,
-    reset_all
+    reset_all,
+    sort_by_month
 )
 
 def menu():
@@ -44,7 +45,7 @@ def menu():
 
 def user_menu():
     print("1. Enter a record of a location you've been to")
-    print("2. Show locations you've been to by sorting options")
+    print("2. Show locations you've been to using sorting/filtering options")
     print("3. Show all locations (both your friends' and yours).")
     print("4. Go back to prior menu")
     print("0. Exit the program")
@@ -101,8 +102,8 @@ def show_locations_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_all_loc_menu():
-    print("1. Show ALL places, sorted by visit month (asc)")
-    print("2. Show ALL places, sorted by visit year (asc)")
+    print("1. Show ALL places, sorted by visit month (desc)")
+    print("2. Show ALL places, sorted by visit year (desc)")
     print("3. Show ALL places, sorted alphabetically by name")
     print("4. Show ALL places,sorted alphabetically by state.")
     print("5. Show ALL places, sorted alphabetically by country.")
@@ -112,8 +113,7 @@ def show_all_loc_menu():
     choice = input("> ")
     if choice == "1":
         try:
-            from trip import Trip
-            Trip.get_all_by_visit()
+           sort_by_month()
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "2":

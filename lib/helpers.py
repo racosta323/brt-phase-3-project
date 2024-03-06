@@ -9,10 +9,10 @@ age_list = []
 
 def greeting():
     print("Welcome! Enter your details to see menu options. (Enter 0 anytime to exit.)")
-    name = input("What is your name? ")
+    name = input("What is your name?> ")
     if name == "0":
         exit_program()
-    age = int(input("How old are you? "))
+    age = int(input("How old are you?> "))
     if age == 0:
         exit_program()
     print(f'Hello, {name}! Nice to meet you.')
@@ -145,9 +145,15 @@ def remove():
     trip = Trip.find_by_id(trip_id)
     trip.destroy()    
 
+def sort_by_month():
+    trips = Trip.get_all_by_visit()
+    sorted_trips = sorted(trips, key = lambda x: x[4])
+    print(sorted_trips)
+    return sorted_trips
+
 def sort_by_year():
     trips = Trip.get_all_by_visit()
-    sorted_trips = sorted(trips, key = lambda x: x[5])
+    sorted_trips = sorted(trips, key = lambda x: x[5], reverse=True)
     print(sorted_trips)
     return sorted_trips
 
@@ -175,19 +181,28 @@ def all_sorted_by_visit():
 def all_friends_visits():
     name = name_list[-1]
     visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != name]
-    return visits
+    if not visits:
+       print("\n Friends do not have any visits. Have them add some! \n")
+    else:
+        return visits
 
 def older_friends():
     name = name_list[-1]
     age = age_list[-1]
     visits = [trip for trip in Trip.older_friends(age) if trip[0] != name]
-    return visits
+    if not visits:
+       print("\n Friends do not have any visits. Have them add some! \n")
+    else:
+        return visits
 
 def younger_friends():
     name = name_list[-1]
     age = age_list[-1]
     visits = [trip for trip in Trip.younger_friends(age) if trip[0] != name]
-    return visits
+    if not visits:
+       print("\n Friends do not have any visits. Have them add some! \n")
+    else:
+        return visits
     
 def reset_all():
     Location.reset()

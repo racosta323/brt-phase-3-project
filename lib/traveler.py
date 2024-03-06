@@ -166,7 +166,8 @@ class Traveler:
             WHERE travelers.name = ?;
         """
         row = CURSOR.execute(sql,(name,)).fetchall()
-        # print(row)
+        results = [f"(TRIP ID: {result[0]}, CITY: {result[1]}, STATE: {result[2]}, COUNTRY: {result[3]}, MONTH: {result[4]}, YEAR: {result[5]}, STARS GIVEN: {result[6]})" for result in row]
+        print(results)
         return row
 
     
