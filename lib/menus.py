@@ -17,7 +17,8 @@ from helpers import (
     sort_by_name,
     sort_by_state,
     sort_by_country,
-    update_name
+    update_name,
+    reset_all
 )
 
 def menu():
@@ -106,6 +107,7 @@ def show_all_loc_menu():
     print("4. Show ALL places,sorted alphabetically by state.")
     print("5. Show ALL places, sorted alphabetically by country.")
     print("6. Go back to prior menu")
+    print("7. Reset all tables (removes information)")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
@@ -135,7 +137,12 @@ def show_all_loc_menu():
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "6":
-        user_menu()  
+        user_menu()
+    elif choice == "7":
+        print("\n Resetting will remove all data. There is NO turning back. \n Are you sure you want to remove data? \n")
+        confirmation = input("Y/N:> ")
+        if confirmation == "Y":
+            reset_all()
     elif choice == "0":
         exit_program()
     else:

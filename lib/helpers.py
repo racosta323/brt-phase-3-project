@@ -194,9 +194,10 @@ def younger_friends():
     return visits
     
 def reset_all():
-    Location.reset()
-    Trip.reset()
-    Traveler.reset()    
+        Location.reset()
+        Trip.reset()
+        Traveler.reset() 
+          
 
 # def same_places():
 #     my = my_travels()
