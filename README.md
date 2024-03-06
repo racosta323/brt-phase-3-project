@@ -15,6 +15,32 @@ The Travel CLI + ORM application is a command-line interface tool with an integr
 
 ---
 
+## CLI
+
+
+---
+
+
+## Helpers
+
+
+---
+
+
+## Location
+
+
+---
+
+## Traveler
+
+
+---
+
+## Menus
+
+
+---
 
 ## Contributors
 
@@ -27,4 +53,5 @@ TaKeya McFadden
 ## Resources
 
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
-- [Google] (https://www.google.com/)
+- [Enterprised DNA Blog](https://blog.enterprisedna.co/how-to-sort-a-list-alphabetically/)
+- [Tutorials Teacher](https://www.tutorialsteacher.com/python/classmethod-decorator#google_vignette)
