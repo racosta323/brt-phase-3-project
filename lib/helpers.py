@@ -63,7 +63,10 @@ def create_trip():
     
 def my_travels():    
     person_name = name_list[-1]
-    return Traveler.get_all_travels_by_name(person_name)
+    try:
+        Traveler.get_all_travels_by_name(person_name)
+    except:
+        "No data - enter a location first"
 
 def trips_by_stars():
     stars = input("Enter number of stars:> ")
@@ -158,6 +161,10 @@ def younger_friends():
     visits = [trip for trip in Trip.younger_friends(age) if trip[0] != person_name]
     return visits
     
+def reset_all():
+    Location.reset()
+    Trip.reset()
+    Traveler.reset()    
 
 # def same_places():
 #     my = my_travels()

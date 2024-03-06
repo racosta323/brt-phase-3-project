@@ -4,27 +4,14 @@ from helpers import (
     exit_program,
 )
 from menus import (
-    menu,
-    user_menu,
-    friends_menu,
-    show_all_loc_menu
+    menu
 )
 
 def main():
     greeting()
     # while True:
     menu()
-    choice = input("> ")
-    if choice == "0":
-        exit_program()
-    elif choice == "1":
-        user_menu()
-    elif choice == "2":
-        friends_menu()
-    elif choice == "3":
-        show_all_loc_menu()
-    else:
-        print("Invalid choice -- enter number corresponding to menu item")
+    
 
              
 if __name__ == '__main__':

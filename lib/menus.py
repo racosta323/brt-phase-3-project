@@ -25,6 +25,20 @@ def menu():
     print("1. Where have you been?")
     print("2. Where have your friends been?")
     print("3. Show all travels (you and friends)")
+    print("4. Update your name.")
+    choice = input("> ")
+    if choice == "0":
+        exit_program()
+    elif choice == "1":
+        user_menu()
+    elif choice == "2":
+        friends_menu()
+    elif choice == "3":
+        show_all_loc_menu()
+    elif choice == "4":
+        pass
+    else:
+        print("Invalid choice -- enter number corresponding to menu item")
 
 def user_menu():
     print("1. Enter a record of a location you've been to")
@@ -43,11 +57,11 @@ def user_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_locations_menu():
-    print("1. Show all locations I've been to.")
-    print("2. Show locations I've been to by country.")
-    print("3. Show locations I've been to by state.")
-    print("4. Show locations I've been to with X number of stars")
-    print("5. Update a location I've been to by trip ID")
+    print("1. Show ALL locations I've been to.")
+    print("2. Show locations I've been to BY COUNTRY.")
+    print("3. Show locations I've been to BY STATE")
+    print("4. Show locations I've been to with X NUMBER OF STARS")
+    print("5. Update a location I've been to BY TRIP ID")
     print("6. Remove a location I've been to.")
     choice = input("> ")
     if choice == "1":
