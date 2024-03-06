@@ -22,11 +22,11 @@ from helpers import (
 
 def menu():
     print("Please select an option:")
-    print("0. Exit the program")
     print("1. Where have you been?")
     print("2. Where have your friends been?")
     print("3. Show all travels (you and friends)")
     print("4. Update your name and age.")
+    print("0. Exit the program")
     choice = input("> ")
     if choice == "0":
         exit_program()
@@ -46,6 +46,7 @@ def user_menu():
     print("2. Show locations you've been to.")
     print("3. Show all locations (both your friends' and yours).")
     print("4. Go back to prior menu")
+    print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
         create_trip()
@@ -68,6 +69,7 @@ def show_locations_menu():
     print("5. Update a location I've been to BY TRIP ID")
     print("6. Remove a location I've been to.")
     print("7. Go back to prior menu")
+    print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
         my_travels()
@@ -95,21 +97,34 @@ def show_all_loc_menu():
     print("4. Show ALL places,sorted alphabetically by state.")
     print("5. Show ALL places, sorted alphabetically by country.")
     print("6. Go back to prior menu")
+    print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
         try:
             from trip import Trip
             Trip.get_all_by_visit()
         except:
-            print("No trips. Enter a trip to create table.")
+            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
     elif choice == "2":
-        sort_by_year()
+        try:
+            sort_by_year()
+        except:
+            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
     elif choice == "3":
-        sort_by_name()
+        try:
+            sort_by_name()
+        except:
+            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
     elif choice == "4":
-        sort_by_state()
+        try:
+            sort_by_state()
+        except:
+            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
     elif choice == "5":
-        sort_by_country
+        try:
+            sort_by_country
+        except:
+            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
     elif choice == "6":
         user_menu()  
     elif choice == "0":
@@ -122,15 +137,24 @@ def friends_menu():
     print("2. Where have friends older than you been?")
     print("3. Where have friends younger than you been?")
     print("4. Go back to prior menu")
+    print("0. Exit the program")
     # print("4. How many friends have been to where I've been?")
     choice = input("> ")
     if choice == "1":
-        all_friends_visits()
-        pass
+        try:
+            all_friends_visits()
+        except:
+            print("Friends do not have any visits.")
     elif choice == "2":
-        older_friends()
+        try:
+            older_friends()
+        except:
+            print("Friends do not have any visits.")
     elif choice == "3":
-        younger_friends()
+        try:
+            younger_friends()
+        except:
+            print("Friends do not have any visits.")
     elif choice == "4":
         menu()
     elif choice == "0":
@@ -144,6 +168,7 @@ def user_trip_update():
     print("3. Update stars")
     print("4. Update all")
     print("5. Go back to prior menu")
+    print("0. Exit the program")
     choice = input("> ")
     if choice == 1:
         update_month()
