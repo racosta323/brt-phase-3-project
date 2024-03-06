@@ -1,20 +1,17 @@
 import ipdb
-
 from __init__ import CONN, CURSOR
 
-#copy class to rename
-
 class Traveler:
-    
+
     all = {}
 
-    ## for testing
     @classmethod
     def reset(cls):
         cls.all = {}
         cls.drop_table()
         cls.create_table()
-    ##
+
+    ## sql class methods
 
     @classmethod
     def create_table(cls):
@@ -76,17 +73,6 @@ class Traveler:
         else:
             raise ValueError("Table does not have any data")  
 
-    def add_to_db(self):
-        Traveler.create_table()
-        sql = """
-            INSERT INTO travelers (name, age)
-            VALUES (?, ?)
-        """
-        CURSOR.execute(sql, (self.name, self.age,))
-        CONN.commit()
-        self.id = CURSOR.lastrowid
-        type(self).all[self.id] = self
-
     @classmethod
     def find_by_name(cls, name):
         sql = """
@@ -96,8 +82,8 @@ class Traveler:
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
 
-
-    def update_row(self):
+    ## sql attr methods
+    def update_in_db(self):
         sql = """
             UPDATE travelers
             SET name = ?, age = ?
@@ -115,6 +101,17 @@ class Traveler:
         CONN.commit()
         del type(self).all[self.id]
         self.id = None
+
+    def add_to_db(self):
+        Traveler.create_table()
+        sql = """
+            INSERT INTO travelers (name, age)
+            VALUES (?, ?)
+        """
+        CURSOR.execute(sql, (self.name, self.age,))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self        
 
     def __init__(self, name, age, id=None):
         self.name = name

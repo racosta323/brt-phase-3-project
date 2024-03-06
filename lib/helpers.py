@@ -1,14 +1,11 @@
 import ipdb
-# from cli import main
 from trip import Trip
 from location import Location
 from traveler import Traveler
-# from menus import menu
 
 travelers = {}
 name_list = []
 age_list = []
-traveler_id =""
 
 def greeting():
     print("Welcome! Enter your details to see menu options. (Enter 0 anytime to exit.)")
@@ -65,7 +62,6 @@ def create_trip():
     
 def my_travels():    
     name = name_list[-1]
-    # ipdb.set_trace()
     travels = Traveler.get_all_travels_by_name(name)
     if travels:
         return travels
@@ -198,14 +194,5 @@ def reset_all():
     Trip.reset()
     Traveler.reset() 
     print("\n DATA HAS BEEN REMOVED \n")
-
-          
-
-# def same_places():
-#     my = my_travels()
-#     friends = all_friends_visits()
-#     for travel in my:
-#         if travel[1] in :
-    
 
 # ipdb.set_trace()

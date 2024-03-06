@@ -7,6 +7,13 @@ class Trip:
     all = {}
 
     @classmethod
+    def reset(cls):
+        cls.all = {}
+        cls.drop_table()
+        cls.create_table()
+
+   ## sql class methods     
+    @classmethod
     def create_table(cls):
         sql = """
             CREATE TABLE IF NOT EXISTS trips (
@@ -46,7 +53,6 @@ class Trip:
         row = CURSOR.execute(sql, (id,)).fetchone()
         ipdb.set_trace()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
-    
     
     @classmethod
     def instance_from_db(cls, row):
@@ -147,12 +153,6 @@ class Trip:
         else:
             raise ValueError("Table does not have any data") 
     
-    def sort_by_name():
-        trips = Trip.get_all_by_visit()
-        pass   
-
-    #this method probably shouldn't be in this class, but instead in the Traveler class
-    #leaving temporarily to complete other methods, but may consider removing later
     @classmethod
     def find_name_by_id(cls, trav_id):
         from traveler import Traveler
@@ -161,8 +161,8 @@ class Trip:
         else:
             ipdb.set_trace()
             raise Exception
-         
 
+    ## sql attr methods
     def add_to_db(self):
         Trip.create_table()
         sql = """
@@ -191,11 +191,10 @@ class Trip:
         """
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
-
-        #also delete from dict
         del type(self).all[self.id]
         self.id = None
 
+    ## attr methods   
     def __init__(self, month, year, stars, location_id, traveler_id, id = None):
         self.month = month
         self.year = year
@@ -271,11 +270,3 @@ class Trip:
         
     def __repr__(self):
         return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'
-    
-
-    ## for testing
-    @classmethod
-    def reset(cls):
-        cls.all = {}
-        cls.drop_table()
-        cls.create_table()

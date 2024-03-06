@@ -154,7 +154,6 @@ def friends_menu():
     print("3. Where have friends younger than you been?")
     print("4. Go back to prior menu")
     print("0. Exit the program")
-    # print("4. How many friends have been to where I've been?")
     choice = input("> ")
     if choice == "1":
         try:

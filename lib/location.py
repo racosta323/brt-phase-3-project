@@ -4,13 +4,13 @@ class Location:
 
     all = {}
 
-    ## for testing
     @classmethod
     def reset(cls):
         cls.all = {}
         cls.drop_table()
         cls.create_table()
-    ##
+
+    ## sql class methods
 
     @classmethod
     def create_table(cls):
@@ -40,6 +40,15 @@ class Location:
         return instance
     
     @classmethod
+    def find_by_id(cls, id):
+        sql = """
+            SELECT * FROM locations
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
+    
+    @classmethod
     def instance_from_db(cls, row):
         location = cls.all.get(row[0])
         if location:
@@ -52,7 +61,7 @@ class Location:
             new_location = cls(row[1], row[2], row[3], row[0])
             cls.all[new_location.id] = new_location
             return new_location
-        
+                
     @classmethod
     def get_all_from_db(cls):
         sql = """
@@ -64,9 +73,17 @@ class Location:
             return row_list
         else:
             raise ValueError("Table does not have any data")
+        
+    @classmethod
+    def find_by_city(cls, city):
+        sql = """
+            SELECT * FROM locations
+            WHERE city = ?
+        """
+        row = CURSOR.execute(sql, (city,)).fetchone()
+        return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")    
 
-    ## sql/attr methods
-
+    ## sql attr methods
     def add_to_db(self):
         Location.create_table()
         sql = """
@@ -96,25 +113,6 @@ class Location:
         CONN.commit()
         del type(self).all[self.id]
         self.id = None
-
-    @classmethod
-    def find_by_id(cls, id):
-        sql = """
-            SELECT * FROM locations
-            WHERE id = ?
-        """
-        row = CURSOR.execute(sql, (id,)).fetchone()
-        return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")    
-
-    @classmethod
-    def find_by_city(cls, city):
-        sql = """
-            SELECT * FROM locations
-            WHERE city = ?
-        """
-        row = CURSOR.execute(sql, (city,)).fetchone()
-        return cls.instance_from_db(row) if row else LookupError("Record not found: Name not in database")
-
 
    ## attr methods     
 
