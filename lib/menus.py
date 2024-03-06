@@ -96,20 +96,23 @@ def show_all_loc_menu():
     print("5. Show ALL places, sorted alphabetically by country.")
     print("6. Go back to prior menu")
     choice = input("> ")
-    if choice == 1:
-        from trip import Trip
-        Trip.get_all_by_visit()
-    elif choice == 2:
+    if choice == "1":
+        try:
+            from trip import Trip
+            Trip.get_all_by_visit()
+        except:
+            print("No trips. Enter a trip to create table.")
+    elif choice == "2":
         sort_by_year()
-    elif choice == 3:
+    elif choice == "3":
         sort_by_name()
-    elif choice == 4:
+    elif choice == "4":
         sort_by_state()
-    elif choice == 5:
+    elif choice == "5":
         sort_by_country
     elif choice == "6":
         user_menu()  
-    elif choice == 0:
+    elif choice == "0":
         exit_program()
     else:
         print("Invalid choice -- enter number corresponding to menu item")

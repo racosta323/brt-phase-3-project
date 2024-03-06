@@ -60,7 +60,6 @@ def create_trip():
         trip = Trip.create_instance(month, year, stars, location_id, traveler_id)
         print("Cool. Thanks. Your entry has been recorded.")
         return trip
-        # menu()
     except Exception as exc:
         print("Error creating trip: ", exc)
     
