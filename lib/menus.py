@@ -35,7 +35,7 @@ def user_menu():
     elif choice == "0":
         exit_program()
     else:
-        print("Invalid choice -- enter number corresponding to menu item")     
+        print("Invalid choice -- enter number corresponding to menu item")
 
 def show_locations_menu():
     print("1. Show all locations I've been to.")
@@ -80,7 +80,7 @@ def show_all_loc_menu():
     elif choice == 0:
         exit_program()
     else:
-        print("Invalid choice -- enter number corresponding to menu item") 
+        print("Invalid choice -- enter number corresponding to menu item")
 
 def friends_menu():
     print("1. Where have your friends been? THIS WILL GIVE ALL (minus you).")
@@ -117,9 +117,8 @@ def user_trip_update():
         update_stars()
     elif choice == 4:
         update_all()
-    elif choice == 0: 
+    elif choice == 0:
         exit_program()
     elif choice == 4:
         pass
-    else:
-        print("Invalid choice -- enter number corresponing to menu item")              
+        print("Invalid choice -- enter number corresponding to menu item")

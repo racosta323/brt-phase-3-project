@@ -26,15 +26,15 @@ def greeting():
         traveler = Traveler.create_instance(name,age)
         travelers[traveler.id] = traveler
     name_list.append(name)
-    age_list.append(age)    
+    age_list.append(age)
     return name, age
-        
+
 def exit_program():
     print("Until next time, Traveler!")
     exit()
-              
+
 def create_trip():
-    Trip.create_table()    
+    Trip.create_table()
     Traveler.get_all_from_db()
     Trip.get_all_from_db()
     Location.get_all_from_db()
@@ -108,7 +108,11 @@ def update_all():
     trip.year = year
     trip.stars = stars
     trip.update_row()
-    
+
+def sort_by_state():
+    trips = Trip.get_all_by_visit()
+    sorted_trips = sorted(trips, key = lambda x: x[2])
+    print(sorted_trips)
 
 def all_sorted_by_visit():
     Trip.get_all_by_visit()
