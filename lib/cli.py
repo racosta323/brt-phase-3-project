@@ -8,12 +8,10 @@ from menus import (
 )
 
 def main():
+    greeting()
     while True:
-        greeting()
         menu()
     
-
-             
 if __name__ == '__main__':
     main()
 

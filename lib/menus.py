@@ -45,6 +45,7 @@ def user_menu():
     print("1. Enter a record of a location you've been to")
     print("2. Show locations you've been to.")
     print("3. Show all locations (both your friends' and yours).")
+    print("4. Go back to prior menu")
     choice = input("> ")
     if choice == "1":
         create_trip()
@@ -52,6 +53,8 @@ def user_menu():
         show_locations_menu()
     elif choice == "3":
         show_all_loc_menu()
+    elif choice == "4":
+        menu()    
     elif choice == "0":
         exit_program()
     else:
@@ -64,6 +67,7 @@ def show_locations_menu():
     print("4. Show locations I've been to with X NUMBER OF STARS")
     print("5. Update a location I've been to BY TRIP ID")
     print("6. Remove a location I've been to.")
+    print("7. Go back to prior menu")
     choice = input("> ")
     if choice == "1":
         my_travels()
@@ -77,6 +81,8 @@ def show_locations_menu():
         user_trip_update()
     elif choice == "6":
         remove()
+    elif choice == "7":
+        user_menu()    
     elif choice == "0":
         exit_program()
     else:
@@ -88,6 +94,7 @@ def show_all_loc_menu():
     print("3. Show ALL places, sorted alphabetically by name")
     print("4. Show ALL places,sorted alphabetically by state.")
     print("5. Show ALL places, sorted alphabetically by country.")
+    print("6. Go back to prior menu")
     choice = input("> ")
     if choice == 1:
         from trip import Trip
@@ -100,6 +107,8 @@ def show_all_loc_menu():
         sort_by_state()
     elif choice == 5:
         sort_by_country
+    elif choice == "6":
+        user_menu()  
     elif choice == 0:
         exit_program()
     else:
@@ -109,6 +118,7 @@ def friends_menu():
     print("1. Where have your friends been? THIS WILL GIVE ALL (minus you).")
     print("2. Where have friends older than you been?")
     print("3. Where have friends younger than you been?")
+    print("4. Go back to prior menu")
     # print("4. How many friends have been to where I've been?")
     choice = input("> ")
     if choice == "1":
@@ -118,9 +128,8 @@ def friends_menu():
         older_friends()
     elif choice == "3":
         younger_friends()
-    # elif choice == "4":
-    #     #same places
-    #     pass
+    elif choice == "4":
+        menu()
     elif choice == "0":
         exit_program()
     else:
@@ -131,6 +140,7 @@ def user_trip_update():
     print("2. Update year")
     print("3. Update stars")
     print("4. Update all")
+    print("5. Go back to prior menu")
     choice = input("> ")
     if choice == 1:
         update_month()
@@ -140,6 +150,8 @@ def user_trip_update():
         update_stars()
     elif choice == 4:
         update_all()
+    elif choice == 5:
+        show_locations_menu()    
     elif choice == 0:
         exit_program()
     elif choice == 4:
