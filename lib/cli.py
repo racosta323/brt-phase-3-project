@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
-from helpers import (
-    greeting,
-    exit_program,
-)
-from menus import (
-    menu
-)
+from helpers import greeting
+from menus import menu
 
 def main():
     greeting()
