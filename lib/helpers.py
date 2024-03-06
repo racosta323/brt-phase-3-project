@@ -194,9 +194,11 @@ def younger_friends():
     return visits
     
 def reset_all():
-        Location.reset()
-        Trip.reset()
-        Traveler.reset() 
+    Location.reset()
+    Trip.reset()
+    Traveler.reset() 
+    print("\n DATA HAS BEEN REMOVED \n")
+
           
 
 # def same_places():
