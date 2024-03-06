@@ -106,7 +106,7 @@ class Location:
 
     def destroy(self):
         sql = """
-            DELETE FROM trips
+            DELETE FROM location
             WHERE id = ?
         """
         CURSOR.execute(sql, (self.id,))
