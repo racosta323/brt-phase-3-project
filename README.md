@@ -40,13 +40,28 @@ To set up the application, follow these steps:
 
 ## Trip
 
+The trip.py file contains the code for the Trip class, which represents a single travel event with attributes such as month, year, stars, location_id, and traveler_id. The class uses SQLite as the underlying database, storing information in a table named 'trips'.
 
+- **The Trip class has the following features and methods:**
+   - *Find Methods:* This class provides 'find_by_id' method to search for records based on the trip's unique ID
+   - *Join Queries:* This class provides methods to retrieve trip data joined with traveler and location data, such as 'get_all_by_visit', 'older_friends', and 'younger_friends'.
+   - *CRUD Operations:* This class supports Create, Read, Update, and Delete (CRUD) operations for managing records in the 'trips' table.
+   - *Data Validation:* This class validates input data to ensure that month, year, stars, location_id and traveler_id attributes are valid.
+   - *Database Management:* This class manages a local SQLite database with 'trips' table, storing and retrieving records as needed.
+   - *Data Persistence:* This class maintains a dictionary 'all' of all Trip instances, allowing for easy access to data throughout the applicaiton's lifetime.
 ---
 
 
 ## Location
 
 The location.py file contains the code for the Location class. The 'Location' class is designed to represent geographical locations with attributes such as city, state, and country. It uses SQLite as the underlying database, storing information in a table named 'locations'.
+
+- **The Location class has the following features and methods:**
+    - *Find Methods:* This class provides 'find_by_id' and 'find_by_city' methods to search for records based on the location's unique ID or city name.
+    - *Database Management:* This class manages a local SQLite database with a 'locations' table, storing and retrieving records as needed.
+    - *Data Validaton:* This class validates input data to ensure that city, state, and country attributes are strings.
+    - *CRUD Operations:* The class supports Create, Read, Update, and Delete (CRUD) operations for managing records in the 'locations'table.
+    - *Data Persistence:* The class maintains a dictionary 'all' of all Locations instances, allowing for easy access to data throughout the application's lifetime.
 
 ---
 
