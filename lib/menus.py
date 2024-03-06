@@ -191,18 +191,18 @@ def user_trip_update():
     print("5. Go back to prior menu")
     print("0. Exit the program")
     choice = input("> ")
-    if choice == 1:
+    if choice == "1":
         update_month()
-    elif choice == 2:
+    elif choice == "2":
         update_year()
-    elif choice == 3:
+    elif choice == "3":
         update_stars()
-    elif choice == 4:
+    elif choice == "4":
         update_all()
-    elif choice == 5:
+    elif choice == "5":
         show_locations_menu()    
-    elif choice == 0:
+    elif choice == "0":
         exit_program()
-    elif choice == 4:
+    elif choice == "4":
         pass
         print("Invalid choice -- enter number corresponding to menu item")
