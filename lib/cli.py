@@ -8,9 +8,9 @@ from menus import (
 )
 
 def main():
-    greeting()
-    # while True:
-    menu()
+    while True:
+        greeting()
+        menu()
     
 
              
