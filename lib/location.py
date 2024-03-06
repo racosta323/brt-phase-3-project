@@ -101,7 +101,7 @@ class Location:
             SET city = ?, state = ?, country = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.city, self.state, self.country))
+        CURSOR.execute(sql, (self.city, self.state, self.country, self.id))
         CONN.commit()
 
     def destroy(self):
