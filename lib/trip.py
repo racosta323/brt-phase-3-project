@@ -98,7 +98,34 @@ class Trip:
             return rows
         else:
             raise ValueError("Table does not have any data")
-        
+
+    @classmethod
+    def older_friends(cls, age):
+        sql = """
+            SELECT travelers.name,
+            locations.city,
+            locations.state,
+            locations.country,
+            trips.month,
+            trips.year,
+            trips.stars 
+            FROM trips
+            JOIN travelers
+            ON trips.traveler_id = travelers.id
+            JOIN locations
+            ON trips.location_id = locations.id
+            WHERE travelers.age > ?
+            ORDER BY year, month
+        """
+        rows = CURSOR.execute(sql, (age,)).fetchall()
+        if rows:
+            return rows
+        else:
+            raise ValueError("Table does not have any data")        
+
+
+
+
     def sort_by_name():
         trips = Trip.get_all_by_visit()
         pass   
@@ -225,28 +252,7 @@ class Trip:
         return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'
     
 
-
-    def trips_by_stars(self, stars):
-        all_trips = self.get_all_travels_by_name()
-        print([trip for trip in all_trips if str(trip[6]) >= str(stars)])
-
-    def trips_by_country(self, country):
-        all_trips = self.get_all_travels_by_name()
-        for trip in all_trips:
-            if country == trip[3]:
-                print(trip)
-                return trip
-            else:
-                LookupError("No travels by this country")
-
-    def trips_by_state(self, state):
-        all_trips = self.get_all_travels_by_name()
-        for trip in all_trips:
-            if state == trip[2]:
-                print(trip)
-                return trip
-            else:
-                LookupError("No travels by this state")
+   
 
     ## for testing
     @classmethod

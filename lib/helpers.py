@@ -116,11 +116,16 @@ def all_sorted_by_visit():
 def all_friends_visits():
     person_name = name_list[-1]
     visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != person_name]
-    print(visits) 
+    # print(visits) 
     return visits
 
 def older_friends():
-    visits = all_friends_visits()
+    person_name = name_list[-1]
+    age = age_list[-1]
+    ipdb.set_trace()
+    visits = [trip for trip in Trip.older_friends(age) if trip[0] != person_name]
+    # print(visits) 
+    return visits
     
 
-# ipdb.set_trace()
+ipdb.set_trace()
