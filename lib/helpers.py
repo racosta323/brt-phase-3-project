@@ -38,7 +38,7 @@ def create_trip():
         Location.get_all_from_db()
     except:
         pass
-    print("Enter basic trip details. \n" + "Enter 'N/A' if not applicable or unsure.\n")
+    print("\n   Enter basic trip details. \n" + "   Enter 'N/A' if not applicable or unsure.\n")
     city_input = input("What city have you been to? (Enter a location.)> ")
     if city_input == "0":
         exit_program()
@@ -96,10 +96,11 @@ def update_name():
 
 def trips_by_stars():
     stars = int(input("Enter number of stars:> "))
-    ipdb.set_trace()
-    try:
-        [travel for travel in my_travels() if travel[6] == stars]
-    except:
+    trips = [travel for travel in my_travels() if travel[6] == stars]
+    if trips:
+        print(trips)
+        return trips
+    else:
         print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
 def trips_by_country():
