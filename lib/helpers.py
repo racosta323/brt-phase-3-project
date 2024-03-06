@@ -38,6 +38,7 @@ def create_trip():
         Location.get_all_from_db()
     except:
         pass
+    print("Enter basic trip details. \n" + "Enter 'N/A' if not applicable or unsure.\n")
     city_input = input("What city have you been to? (Enter a location.)> ")
     if city_input == "0":
         exit_program()
@@ -94,12 +95,12 @@ def update_name():
     print(f"Your name has updated to '{traveler.name}' \n Your age has updated to '{traveler.age}'.")
 
 def trips_by_stars():
+    name = name_list[-1]
     stars = input("Enter number of stars:> ")
-    trips = [travel for travel in my_travels() if travel[6] == int(stars)]
-    if trips:
-        print(trips)
-        return trips
-    else:
+    from traveler import Traveler
+    try:
+        Traveler.get_all_travels_by_stars(name, stars)
+    except:
         print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
 def trips_by_country():

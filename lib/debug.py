@@ -4,7 +4,6 @@ from trip import Trip
 from traveler import Traveler
 import ipdb
 from location import Location
-import helpers
 from __init__ import CONN, CURSOR
 
 # trip1 = Trip( "March", 2023)

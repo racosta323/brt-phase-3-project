@@ -85,17 +85,17 @@ def show_locations_menu():
         try:
             trips_by_country()
         except:
-            print("\n No trips by country entered \n")
+            print("\n No trips by country recorded \n")
     elif choice == "3":
         try:
             trips_by_state()
         except:
-            print("\n No trips by state entered \n")
+            print("\n No trips by state recorded \n")
     elif choice == "4":
         try:
             trips_by_stars()
         except:
-            print("\n No trips by stars entered \n")
+            print("\n No trips by stars recorded \n")
     elif choice == "5":
         user_trip_update()
     elif choice == "6":

@@ -148,7 +148,7 @@ class Traveler:
     def __repr__(self):
         return f"<name={self.name}, id={self.id}, age={self.age}>"
     
-    ##adding temporarily
+
     def get_all_travels_by_name(name):
         sql = """
             SELECT trips.id, 
@@ -166,11 +166,28 @@ class Traveler:
             WHERE travelers.name = ?;
         """
         row = CURSOR.execute(sql,(name,)).fetchall()
-        results = [f"(TRIP ID: {result[0]}, CITY: {result[1]}, STATE: {result[2]}, COUNTRY: {result[3]}, MONTH: {result[4]}, YEAR: {result[5]}, STARS GIVEN: {result[6]})" for result in row]
-        print(results)
+        print([f"(TRIP ID: {result[0]}, CITY: {result[1]}, STATE: {result[2]}, COUNTRY: {result[3]}, MONTH: {result[4]}, YEAR: {result[5]}, STARS GIVEN: {result[6]})" for result in row])
         return row
 
-    
+    def get_all_travels_by_stars(name, id):
+        sql = """
+            SELECT trips.id, 
+            locations.city, 
+            locations.state,
+            locations.country,
+            trips.month,
+            trips.year,
+            trips.stars 
+            FROM trips
+            JOIN travelers
+            ON trips.traveler_id = travelers.id
+            JOIN locations
+            ON trips.location_id = locations.id
+            WHERE travelers.name = ? AND trips.stars = ?;
+        """
+        row = CURSOR.execute(sql,(name,id,)).fetchall()
+        print([f"(TRIP ID: {result[0]}, CITY: {result[1]}, STATE: {result[2]}, COUNTRY: {result[3]}, MONTH: {result[4]}, YEAR: {result[5]}, STARS GIVEN: {result[6]})" for result in row])
+        return row
 
     
         
