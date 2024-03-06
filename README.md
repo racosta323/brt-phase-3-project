@@ -48,7 +48,7 @@ The trip.py file contains the code for the Trip class, which represents a single
    - *CRUD Operations:* This class supports Create, Read, Update, and Delete (CRUD) operations for managing records in the 'trips' table.
    - *Data Validation:* This class validates input data to ensure that month, year, stars, location_id and traveler_id attributes are valid.
    - *Database Management:* This class manages a local SQLite database with 'trips' table, storing and retrieving records as needed.
-   - *Data Persistence:* This class maintains a dictionary 'all' of all Trip instances, allowing for easy access to data throughout the applicaiton's lifetime.
+   - *Data Persistence:* This class maintains a dictionary 'all' of all Trip instances, allowing for easy access to data throughout the application's lifetime.
 ---
 
 
@@ -67,7 +67,15 @@ The location.py file contains the code for the Location class. The 'Location' cl
 
 ## Traveler
 
+The traveler.py file contains the code for the Traveler class, which represents a traveler with attributes such as name and age. The class uses SQLite as the underlying database, storing information in a table named 'travelers'.
 
+- **The Traveler class has the following features and methods:**
+    - *Find Methods:* This class provides 'find_by_id' and 'find_by_name' methods to search for records based on the traveler's unique ID or name.
+    - *Database Management:* This class manages a local SQLite database with a 'travelers' table, storing and retrieving records as needed.
+    - *Data Validaton:* This class validates input data to ensure that name and age attributes are valid.
+    - *CRUD Operations:* The class supports Create, Read, Update, and Delete (CRUD) operations for managing records in the 'travelers'table.
+    - *Data Persistence:* The class maintains a dictionary 'all' of all Locations instances, allowing for easy access to data throughout the application's lifetime.
+    - *Join Queries:* This class provides a method to retrieve travel data joined with trip and location data, such as 'get_all_travels_by_name'.
 ---
 
 ## Contributors
