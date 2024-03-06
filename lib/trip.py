@@ -273,8 +273,6 @@ class Trip:
         return f'<Trip ID: {self.id}: month={self.month}, year={self.year}, stars={self.stars} traveler_id = {self.traveler_id}>'
     
 
-   
-
     ## for testing
     @classmethod
     def reset(cls):

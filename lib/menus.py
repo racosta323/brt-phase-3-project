@@ -1,7 +1,7 @@
 from helpers import (
     create_trip,
     exit_program,
-    travels_by_name,
+    my_travels,
     trips_by_country,
     trips_by_stars,
     trips_by_state,
@@ -9,6 +9,7 @@ from helpers import (
     update_year,
     update_stars,
     update_all,
+    remove,
     all_friends_visits,
     older_friends,
     younger_friends,
@@ -44,9 +45,10 @@ def show_locations_menu():
     print("3. Show locations I've been to by state.")
     print("4. Show locations I've been to with X number of stars")
     print("5. Update a location I've been to by trip ID")
+    print("6. Remove a location I've been to.")
     choice = input("> ")
     if choice == "1":
-        travels_by_name()
+        my_travels()
     elif choice == "2":
         trips_by_country()
     elif choice == "3":
@@ -55,6 +57,8 @@ def show_locations_menu():
         trips_by_stars()
     elif choice == "5":
         user_trip_update()
+    elif choice == "6":
+        remove()
     elif choice == "0":
         exit_program()
     else:

@@ -109,6 +109,11 @@ def update_all():
     trip.stars = stars
     trip.update_row()
 
+def remove():
+    trip_id = input("Enter the trip ID for the trip you'd like to remove:> ")
+    trip = Trip.find_by_id(trip_id)
+    trip.destroy()    
+
 def sort_by_state():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[2])
