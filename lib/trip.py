@@ -146,7 +146,7 @@ class Trip:
             return rows
         else:
             raise ValueError("Table does not have any data") 
-
+    
     def sort_by_name():
         trips = Trip.get_all_by_visit()
         pass   

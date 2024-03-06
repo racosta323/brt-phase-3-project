@@ -61,21 +61,21 @@ def create_trip():
     except Exception as exc:
         print("Error creating trip: ", exc)
     
-def travels_by_name():    
+def my_travels():    
     person_name = name_list[-1]
     return Traveler.get_all_travels_by_name(person_name)
 
 def trips_by_stars():
     stars = input("Enter number of stars:> ")
-    print([travel for travel in travels_by_name() if travel[6] == int(stars)])
+    print([travel for travel in my_travels() if travel[6] == int(stars)])
 
 def trips_by_country():
     country = input("Enter country:> ")
-    print([travel for travel in travels_by_name() if travel[3] == country])
+    print([travel for travel in my_travels() if travel[3] == country])
 
 def trips_by_state():
     state = input("Enter state:> ")
-    print([travel for travel in travels_by_name() if travel[2] == state])
+    print([travel for travel in my_travels() if travel[2] == state])
 
 def update_month():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
@@ -129,6 +129,13 @@ def younger_friends():
     age = age_list[-1]
     visits = [trip for trip in Trip.younger_friends(age) if trip[0] != person_name]
     return visits
+    
+
+def same_places():
+    my = my_travels()
+    friends = all_friends_visits()
+    for travel in my:
+        if travel[1] in :
     
 
 ipdb.set_trace()
