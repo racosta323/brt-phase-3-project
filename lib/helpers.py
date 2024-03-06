@@ -95,11 +95,10 @@ def update_name():
     print(f"Your name has updated to '{traveler.name}' \n Your age has updated to '{traveler.age}'.")
 
 def trips_by_stars():
-    name = name_list[-1]
-    stars = input("Enter number of stars:> ")
-    from traveler import Traveler
+    stars = int(input("Enter number of stars:> "))
+    ipdb.set_trace()
     try:
-        Traveler.get_all_travels_by_stars(name, stars)
+        [travel for travel in my_travels() if travel[6] == stars]
     except:
         print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
