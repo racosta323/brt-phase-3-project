@@ -58,17 +58,19 @@ def create_trip():
         location_id = location.id
     try:
         trip = Trip.create_instance(month, year, stars, location_id, traveler_id)
-        print("Cool. Thanks. Your entry has been recorded.")
+        print("\n Cool. Thanks. Your entry has been recorded. \n")
         return trip
     except Exception as exc:
         print("Error creating trip: ", exc)
     
 def my_travels():    
     name = name_list[-1]
-    try:
-        Traveler.get_all_travels_by_name(name)
-    except:
-        "No data - enter a location first"
+    # ipdb.set_trace()
+    travels = Traveler.get_all_travels_by_name(name)
+    if travels:
+        return travels
+    else:
+        print("\n No data. \n Enter a trip through the 'Where have you been?' menu to create table.\n")
 
 def update_name():
     name = name_list[-1]
@@ -85,15 +87,30 @@ def update_name():
 
 def trips_by_stars():
     stars = input("Enter number of stars:> ")
-    print([travel for travel in my_travels() if travel[6] == int(stars)])
+    trips = [travel for travel in my_travels() if travel[6] == int(stars)]
+    if trips:
+        print(trips)
+        return trips
+    else:
+        print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
 def trips_by_country():
     country = input("Enter country:> ")
-    print([travel for travel in my_travels() if travel[3] == country])
+    trips = [travel for travel in my_travels() if travel[3] == country]
+    if trips:
+        print(trips)
+        return trips
+    else:
+        print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
 def trips_by_state():
     state = input("Enter state:> ")
-    print([travel for travel in my_travels() if travel[2] == state])
+    trips = [travel for travel in my_travels() if travel[2] == state]
+    if trips:
+        print(trips)
+        return trips
+    else:
+        print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
 def update_month():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")

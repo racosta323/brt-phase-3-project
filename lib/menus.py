@@ -22,8 +22,8 @@ from helpers import (
 
 def menu():
     print("Please select an option:")
-    print("1. Where have you been?")
-    print("2. Where have your friends been?")
+    print("1. Where have you been? (Your travels)")
+    print("2. Where have your friends been? (Friends' travels)")
     print("3. Show all travels (you and friends)")
     print("4. Update your name and age.")
     print("0. Exit the program")
@@ -43,7 +43,7 @@ def menu():
 
 def user_menu():
     print("1. Enter a record of a location you've been to")
-    print("2. Show locations you've been to.")
+    print("2. Show locations you've been to by sorting options")
     print("3. Show all locations (both your friends' and yours).")
     print("4. Go back to prior menu")
     print("0. Exit the program")
@@ -62,23 +62,32 @@ def user_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_locations_menu():
-    print("1. Show ALL locations I've been to.")
-    print("2. Show locations I've been to BY COUNTRY.")
-    print("3. Show locations I've been to BY STATE")
-    print("4. Show locations I've been to with X NUMBER OF STARS")
-    print("5. Update a location I've been to BY TRIP ID")
-    print("6. Remove a location I've been to.")
+    print("1. Show ALL locations you've been to.")
+    print("2. Show locations you've been to BY COUNTRY.")
+    print("3. Show locations you've been to BY STATE")
+    print("4. Show locations you've been to with X NUMBER OF STARS")
+    print("5. Update a location you've been to BY TRIP ID")
+    print("6. Remove a location you've been to.")
     print("7. Go back to prior menu")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
         my_travels()
     elif choice == "2":
-        trips_by_country()
+        try:
+            trips_by_country()
+        except:
+            print("\n No trips by country entered \n")
     elif choice == "3":
-        trips_by_state()
+        try:
+            trips_by_state()
+        except:
+            print("\n No trips by state entered \n")
     elif choice == "4":
-        trips_by_stars()
+        try:
+            trips_by_stars()
+        except:
+            print("\n No trips by stars entered \n")
     elif choice == "5":
         user_trip_update()
     elif choice == "6":
@@ -104,27 +113,27 @@ def show_all_loc_menu():
             from trip import Trip
             Trip.get_all_by_visit()
         except:
-            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
+            print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "2":
         try:
             sort_by_year()
         except:
-            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
+            print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "3":
         try:
             sort_by_name()
         except:
-            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
+            print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "4":
         try:
             sort_by_state()
         except:
-            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
+            print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "5":
         try:
             sort_by_country
         except:
-            print("No trips. \n Enter a trip through the 'Where have you been?' menu to create table.")
+            print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "6":
         user_menu()  
     elif choice == "0":
@@ -144,17 +153,17 @@ def friends_menu():
         try:
             all_friends_visits()
         except:
-            print("Friends do not have any visits.")
+            print("\n Friends do not have any visits. Have them add some! \n")
     elif choice == "2":
         try:
             older_friends()
         except:
-            print("Friends do not have any visits.")
+            print("\n Friends do not have any visits. Have them add some! \n")
     elif choice == "3":
         try:
             younger_friends()
         except:
-            print("Friends do not have any visits.")
+            print("\n Friends do not have any visits. Have them add some! \n")
     elif choice == "4":
         menu()
     elif choice == "0":
