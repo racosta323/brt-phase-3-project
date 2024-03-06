@@ -39,11 +39,23 @@ def create_trip():
     except:
         pass
     city_input = input("What city have you been to? (Enter a location.)> ")
+    if city_input == "0":
+        exit_program()
     state = input("In what state?> ")
+    if state == "0":
+        exit_program()
     country = input("In what country?> ")
+    if country == "0":
+        exit_program()
     stars = int(input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> "))
+    if stars == "0":
+        exit_program()
     year = int(input("What year did you go?> "))
+    if year == "0":
+        exit_program()
     month = input("In what month?> ")
+    if month == "0":
+        exit_program()
     name = name_list[-1]
     traveler = Traveler.find_by_name(name)
     traveler_id = traveler.id

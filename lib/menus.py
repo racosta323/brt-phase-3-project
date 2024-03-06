@@ -48,6 +48,7 @@ def user_menu():
     print("2. Show locations you've been to using sorting/filtering options")
     print("3. Show all locations (both your friends' and yours).")
     print("4. Go back to prior menu")
+    print("5. Reset all tables (removes information)")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
@@ -57,7 +58,12 @@ def user_menu():
     elif choice == "3":
         show_all_loc_menu()
     elif choice == "4":
-        menu()    
+        menu()  
+    elif choice == "5":
+        print("\n Resetting will remove all data. There is NO turning back. \n Are you sure you want to remove data? \n")
+        confirmation = input("Y/N:> ")
+        if confirmation == "Y":
+            reset_all()        
     elif choice == "0":
         exit_program()
     else:
