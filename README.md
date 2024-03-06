@@ -29,6 +29,7 @@ The Travel CLI + ORM application is a command-line interface tool with an integr
 
 ## Location
 
+The location.py file contains the code for the Location class. The 'Location' class is designed to represent geographical locations with attributes such as city, state, and country. It uses SQLite as the underlying database, storing information in a table named 'locations'.
 
 ---
 
