@@ -86,7 +86,7 @@ def friends_menu():
     print("1. Where have your friends been? THIS WILL GIVE ALL (minus you).")
     print("2. Where have friends older than you been?")
     print("3. Where have friends younger than you been?")
-    print("4. How many friends have been to where I've been?")
+    # print("4. How many friends have been to where I've been?")
     choice = input("> ")
     if choice == "1":
         all_friends_visits()
@@ -95,10 +95,9 @@ def friends_menu():
         older_friends()
     elif choice == "3":
         younger_friends()
-        pass
-    elif choice == "4":
-        #same places
-        pass
+    # elif choice == "4":
+    #     #same places
+    #     pass
     elif choice == "0":
         exit_program()
     else:

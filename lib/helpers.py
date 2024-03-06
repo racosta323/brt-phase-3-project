@@ -131,11 +131,11 @@ def younger_friends():
     return visits
     
 
-def same_places():
-    my = my_travels()
-    friends = all_friends_visits()
-    for travel in my:
-        if travel[1] in :
+# def same_places():
+#     my = my_travels()
+#     friends = all_friends_visits()
+#     for travel in my:
+#         if travel[1] in :
     
 
 ipdb.set_trace()
