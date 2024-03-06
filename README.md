@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Travel CLI + ORM application is a command-line interface tool with an integrated Object-Relational Mapping (ORM) system designed to help users organize and compare travel information effortlessly. Users can input details about their trips and those of their friends, allowing for easy management and comparison of travel plans.
+*The Travel CLI + ORM application is a command-line interface tool with an integrated Object-Relational Mapping (ORM) system designed to help users organize and compare travel information effortlessly. Users can input details about their trips and those of their friends, allowing for easy management and comparison of travel plans.*
 
 
 ---
@@ -17,7 +17,24 @@ The Travel CLI + ORM application is a command-line interface tool with an integr
 
 ## CLI
 
+- **Main Menu: The main menu offers the following options:**
+  - *See all travels:* Display a list of all the trips created by the user.
+  - *Entering data:* Provides options to add, update, or delete trip records.
+  - *Show all user locations:* Display the user's saved locations.
+  - *See all friends travels:* Display the travel plans of the user's friends.
 
+- **User Details:** Users are prompted to enter their name and age upon starting the application.
+- **Nested Menus:** Users can navigate through nested menus to access various functionalites.
+- **Data Persistence:** Users will always find themselves in menus unless they decide to exit the application on their own, ensuring data persistence throughout their session.
+- **Exit the Application:** Users can exit the application by typing '0' in any menu prompt.
+
+To set up the application, follow these steps:
+
+1. Install the required packages using Pipenv: `pipenv install`
+2. Enter the virtual environment using Pipenv shell: `pipenv shell`
+3. Run the CLI by executing: `python lib/cli.py`
+
+==Remember to encourage users to reset all tables before beginning: `print("5. Reset all tables (removes information)")`This will ensure a clean slate for users to start entering their travel information.==
 ---
 
 
