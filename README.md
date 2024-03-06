@@ -21,7 +21,7 @@ The Travel CLI + ORM application is a command-line interface tool with an integr
 ---
 
 
-## Helpers
+## Trip
 
 
 ---
@@ -34,11 +34,6 @@ The location.py file contains the code for the Location class. The 'Location' cl
 ---
 
 ## Traveler
-
-
----
-
-## Menus
 
 
 ---
