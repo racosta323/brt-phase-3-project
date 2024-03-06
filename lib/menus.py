@@ -11,7 +11,8 @@ from helpers import (
     update_all,
     all_friends_visits,
     older_friends,
-    younger_friends
+    younger_friends,
+    sort_by_state
 )
 
 def menu():
@@ -60,11 +61,10 @@ def show_locations_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_all_loc_menu():
-    print("1. Show ALL places (unordered)")
-    print("2. Sort by date of visit.")
-    print("3. Sort alphabetically by name")
-    print("4. Sort alphabetically by state.")
-    print("5. Sort alphabetically by country.")
+    print("1. Show ALL places, sorted by visit date")
+    print("3. Show ALL places, sorted alphabetically by name")
+    print("4. Show ALL places,sorted alphabetically by state.")
+    print("5. Show ALL places, sorted alphabetically by country.")
     choice = input("> ")
     if choice == 1:
         from trip import Trip
@@ -72,7 +72,7 @@ def show_all_loc_menu():
     elif choice == 2:
         pass
     elif choice == 3:
-        pass
+        sort_by_state()
     elif choice == 4:
         pass
     elif choice == 5:
