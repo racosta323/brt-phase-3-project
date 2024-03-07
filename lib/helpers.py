@@ -85,14 +85,17 @@ def update_name():
     name = name_list[-1]
     traveler = Traveler.find_by_name(name)
     age = traveler.age
-    print(f"Your name is currently {name}.")
-    print(f"Your age is currently {age}.")
+    print(f"\nYour name is currently {name}.")
+    print(f"Your age is currently {age}.\n")
     updated_name = input("Enter your updated name:> ")
     updated_age = int(input("Enter your updated age:> "))
     traveler.name = updated_name
     traveler.age = updated_age
-    traveler.update_row()
-    print(f"Your name has updated to '{traveler.name}' \n Your age has updated to '{traveler.age}'.")
+    try:
+        traveler.update_in_db()
+        print(f"\nYour name has updated to '{traveler.name}' \n Your age has updated to '{traveler.age}'.\n")
+    except:
+        print("Something went wrong. Update incomplete. Please try again.")
 
 def trips_by_stars():
     stars = int(input("Enter number of stars:> "))
@@ -127,6 +130,7 @@ def update_month():
     trip = Trip.find_by_id(trip_id)
     trip.month = month
     trip.update_row()
+    print(f"Updated month of Trip ID: {trip_id} to {month}\n")
 
 def update_year():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
@@ -134,6 +138,7 @@ def update_year():
     trip = Trip.find_by_id(trip_id)
     trip.year = year
     trip.update_row()
+    print(f"Updated year of Trip ID: {trip_id} to {year}\n")
 
 def update_stars():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
@@ -141,6 +146,7 @@ def update_stars():
     trip = Trip.find_by_id(trip_id)
     trip.stars = stars
     trip.update_row()
+    print(f"Updated stars of Trip ID:{trip_id} to {stars}\n")
 
 def update_all():
     trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
@@ -152,6 +158,7 @@ def update_all():
     trip.year = year
     trip.stars = stars
     trip.update_row()
+    print(f"Updated month, year, stars for Trip ID: {trip_id} to {month}, {year}, {stars}, respectively\n")
 
 def remove():
     trip_id = input("Enter the trip ID for the trip you'd like to remove:> ")
