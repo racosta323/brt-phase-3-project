@@ -8,14 +8,14 @@ name_list = []
 age_list = []
 
 def greeting():
-    print("Welcome! Enter your details to see menu options. (Enter 0 anytime to exit.)")
+    print("\n   Welcome! Tell us where you've been or check out where your friends have been!\n    Enter your basic info to see menu options. (Enter 0 anytime to exit.)\n")
     name = input("What is your name?> ")
     if name == "0":
         exit_program()
     age = int(input("How old are you?> "))
     if age == 0:
         exit_program()
-    print(f'Hello, {name}! Nice to meet you.')
+    print(f'\n  Hello, {name}! Nice to meet you.\n')
     try:
         traveler = Traveler.find_by_name(name)
         travelers[traveler.id] = traveler

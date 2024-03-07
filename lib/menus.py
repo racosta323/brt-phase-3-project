@@ -23,7 +23,7 @@ from helpers import (
 )
 
 def menu():
-    print("Please select an option:")
+    print("Please select an option (enter number correspoding with menu item):\n")
     print("1. Where have you been? (Your travels)")
     print("2. Where have your friends been? (Friends' travels)")
     print("3. Show all travels (you and friends)")
@@ -44,6 +44,7 @@ def menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def user_menu():
+    print("\nAdd your travels to the database or check out travels by you and your friends.\n")
     print("1. Enter a record of a location you've been to")
     print("2. Show locations you've been to using sorting/filtering options")
     print("3. Show all locations (both your friends' and yours).")
@@ -70,6 +71,7 @@ def user_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_locations_menu():
+    print("\nSelect how you'd like to review your travels\n")
     print("1. Show ALL locations you've been to.")
     print("2. Show locations you've been to BY COUNTRY.")
     print("3. Show locations you've been to BY STATE")
@@ -108,6 +110,7 @@ def show_locations_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def show_all_loc_menu():
+    print("\nSelect how you'd like to review ALL travels (yours and your friends'!)\n")
     print("1. Show ALL places, sorted by visit month (desc)")
     print("2. Show ALL places, sorted by visit year (desc)")
     print("3. Show ALL places, sorted alphabetically by name")
@@ -155,7 +158,8 @@ def show_all_loc_menu():
         print("Invalid choice -- enter number corresponding to menu item")
 
 def friends_menu():
-    print("1. Where have your friends been? THIS WILL GIVE ALL (minus you).")
+    print("\nSelect how you'd like to review your FRIENDS' travels\n")
+    print("1. Where have your friends been?")
     print("2. Where have friends older than you been?")
     print("3. Where have friends younger than you been?")
     print("4. Go back to prior menu")
@@ -184,11 +188,13 @@ def friends_menu():
         print("Invalid choice -- enter number corresponding to the menu item")
 
 def user_trip_update():
+    print("\nUpdate a record\n" + "Note: You must have the associated TripID! Enter '5' to get list of all trips.\n")
     print("1. Update month")
     print("2. Update year")
     print("3. Update stars")
     print("4. Update all")
-    print("5. Go back to prior menu")
+    print("5. See all trips")
+    print("6. Go back to prior menu")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
@@ -200,6 +206,8 @@ def user_trip_update():
     elif choice == "4":
         update_all()
     elif choice == "5":
+        my_travels()
+    elif choice == "6":
         show_locations_menu()    
     elif choice == "0":
         exit_program()
