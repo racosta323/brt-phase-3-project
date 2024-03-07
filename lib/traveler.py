@@ -1,4 +1,3 @@
-import ipdb
 from __init__ import CONN, CURSOR
 
 class Traveler:

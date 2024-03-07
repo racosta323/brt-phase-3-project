@@ -108,8 +108,8 @@ def trips_by_stars():
     stars = int(input("Enter number of stars:> "))
     trips = [travel for travel in travels if travel[6] == stars]
     if trips:
-        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
-        return results
+        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in trips]
+        return trips
     else:
         print(f"No matching entries with {stars} stars.\n")
 
@@ -119,7 +119,7 @@ def trips_by_country():
     country = input("Enter country:> ")
     trips = [travel for travel in travels if travel[3] == country]
     if trips:
-        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
+        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in trips]
         return results
     else:
         print(f"No matching entries for {country}")
@@ -130,7 +130,7 @@ def trips_by_state():
     state = input("Enter state:> ")
     trips = [travel for travel in travels if travel[2] == state]
     if trips:
-        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
+        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in trips]
         return results
     else:
         print(f"No matching entries for {state}")
@@ -245,4 +245,4 @@ def reset_all():
     Traveler.reset() 
     print("\n DATA HAS BEEN REMOVED \n")
 
-ipdb.set_trace()
+# ipdb.set_trace()
