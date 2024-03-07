@@ -185,7 +185,8 @@ def sort_by_year():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[5], reverse=True)
     if sorted_trips:
-        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]        return results
+        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]        
+        return results
     else:
         print("No entries to display.")
 
@@ -240,5 +241,4 @@ def reset_all():
     Traveler.reset() 
     print("\n DATA HAS BEEN REMOVED \n")
 
-
-ipdb.set_trace()
+# ipdb.set_trace()
