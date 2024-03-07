@@ -15,7 +15,6 @@ class Trip:
         "october", 
         "november", 
         "december",
-        "n/A"
     }
 
     all = {}

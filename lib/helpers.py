@@ -20,6 +20,7 @@ def greeting():
         traveler = Traveler.find_by_name(name.capitalize())
         travelers[traveler.id] = traveler
     except:
+        # age = age_list[-1]
         traveler = Traveler.create_instance(name.capitalize(),age)
         travelers[traveler.id] = traveler
     name_list.append(name)
@@ -37,7 +38,10 @@ def create_trip():
         Trip.get_all_from_db()
         Location.get_all_from_db()
     except:
-        pass
+        name = name_list[-1]
+        age = age_list[-1]
+        traveler = Traveler.create_instance(name.capitalize(),age)
+        travelers[traveler.id] = traveler
     print("\n   Enter basic trip details. \n" + "   Enter 'N/A' if not applicable or unsure.\n")
     city_input = input("What city have you been to? (Enter a location.)> ")
     if city_input == "0":
@@ -62,8 +66,11 @@ def create_trip():
     if month == "0":
         exit_program()
     name = name_list[-1]
-    traveler = Traveler.find_by_name(name.capitalize())
-    traveler_id = traveler.id
+    try:
+        traveler = Traveler.find_by_name(name.capitalize())
+        traveler_id = traveler.id
+    except:
+        pass
     try:
         location = Location.find_by_city(city_input)
         location_id = location.id
@@ -196,7 +203,7 @@ def sort_by_year():
 
 def sort_by_name():
     trips = Trip.get_all_by_visit()
-    sorted_trips = sorted(trips, key = lambda x: x[0])
+    sorted_trips = sorted(trips, key = lambda x: x[0], reverse=True)
     if sorted_trips:
         results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]
         return results
