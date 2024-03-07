@@ -137,7 +137,7 @@ class Trip:
             WHERE travelers.age > ?
             ORDER BY year, month
         """
-        rows = CURSOR.execute(sql, (age,)).fetchall()
+        rows = CURSOR.execute(sql, (int(age),)).fetchall()
         if rows:
             return rows
         else:
@@ -173,7 +173,6 @@ class Trip:
         if trav_id in Traveler.all:
             return Traveler.all[trav_id].name
         else:
-            ipdb.set_trace()
             raise Exception
 
     ## sql attr methods
@@ -237,7 +236,7 @@ class Trip:
 
     @year.setter
     def year(self, new_year):
-        if isinstance(new_year, int):
+        if isinstance(new_year, int) or new_year == "N/A":
             self._year = new_year    
         else:
             raise TypeError("Year must be an integer")
@@ -248,7 +247,7 @@ class Trip:
 
     @stars.setter
     def stars(self, new_stars):
-        if isinstance(new_stars, int):
+        if isinstance(new_stars, int) or new_stars == "N/A":
             if 0 <= new_stars <= 5:
                 self._stars = new_stars
             else:

@@ -97,9 +97,6 @@ def show_locations_menu():
     print("2. Show locations you've been to BY COUNTRY.")
     print("3. Show locations you've been to BY STATE")
     print("4. Show locations you've been to with X NUMBER OF STARS")
-    # print("5. Update a location you've been to BY TRIP ID")
-    # print("6. Remove a location you've been to.")
-    # print("7. Go back to prior menu")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
@@ -118,13 +115,7 @@ def show_locations_menu():
         try:
             trips_by_stars()
         except:
-            print("\n No trips by stars recorded \n")
-    # elif choice == "5":
-    #     user_trip_update()
-    # elif choice == "6":
-    #     remove()
-    # elif choice == "7":
-    #     user_menu()    
+            print("\n No trips by stars recorded \n")  
     elif choice == "0":
         exit_program()
     else:
@@ -188,19 +179,19 @@ def friends_menu():
     choice = input("> ")
     if choice == "1":
         try:
-            all_friends_visits()
+            print(all_friends_visits())
         except:
             print("\n Friends do not have any visits. Have them add some! \n")
     elif choice == "2":
         try:
-            older_friends()
+            print(older_friends())
         except:
-            print("\n Friends do not have any visits. Have them add some! \n")
+            print("\nNo friends older than you.\n")
     elif choice == "3":
         try:
-            younger_friends()
+            print(younger_friends())
         except:
-            print("\n Friends do not have any visits. Have them add some! \n")
+            print("\nNo friends younger than you.\n")
     elif choice == "4":
         menu()
     elif choice == "0":

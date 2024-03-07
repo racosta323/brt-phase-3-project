@@ -48,10 +48,10 @@ def create_trip():
     country = input("In what country?> ")
     if country == "0":
         exit_program()
-    stars = int(input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> "))
+    stars = input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> ")
     if stars == "0":
         exit_program()
-    year = int(input("What year did you go?> "))
+    year = input("What year did you go?> ")
     if year == "0":
         exit_program()
     month = input("In what month?> ")
@@ -67,7 +67,7 @@ def create_trip():
         location = Location.create_instance(city_input, state, country)
         location_id = location.id
     try:
-        trip = Trip.create_instance(month, year, stars, location_id, traveler_id)
+        trip = Trip.create_instance(month, int(year), int(stars), location_id, traveler_id)
         print("\n Cool. Thanks. Your entry has been recorded. \n")
         return trip
     except Exception as exc:
@@ -210,19 +210,13 @@ def older_friends():
     name = name_list[-1]
     age = age_list[-1]
     visits = [trip for trip in Trip.older_friends(age) if trip[0] != name]
-    if not visits:
-       print("\n Friends do not have any visits. Have them add some! \n")
-    else:
-        return visits
+    return visits
 
 def younger_friends():
     name = name_list[-1]
     age = age_list[-1]
     visits = [trip for trip in Trip.younger_friends(age) if trip[0] != name]
-    if not visits:
-       print("\n Friends do not have any visits. Have them add some! \n")
-    else:
-        return visits
+    return visits
     
 def reset_all():
     Location.reset()
@@ -230,4 +224,4 @@ def reset_all():
     Traveler.reset() 
     print("\n DATA HAS BEEN REMOVED \n")
 
-# ipdb.set_trace()
+
