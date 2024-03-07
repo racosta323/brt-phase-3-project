@@ -67,10 +67,11 @@ def create_trip():
         exit_program()
     name = name_list[-1]
     try:
+        #in case data is reset
         traveler = Traveler.find_by_name(name.capitalize())
         traveler_id = traveler.id
     except:
-        pass
+        traveler = Traveler.create_instance(name, age)
     try:
         location = Location.find_by_city(city_input)
         location_id = location.id
@@ -95,8 +96,13 @@ def my_travels():
 
 def update_name():
     name = name_list[-1]
-    traveler = Traveler.find_by_name(name.capitalize())
-    age = traveler.age
+    age = age_list[-1]
+    try:
+        #in case data is reset
+        traveler = Traveler.find_by_name(name.capitalize())
+        age = traveler.age
+    except:
+        traveler = Traveler.create_instance(name, age)
     print(f"\nYour name is currently {name}.")
     print(f"Your age is currently {age}.\n")
     updated_name = input("Enter your updated name:> ")
