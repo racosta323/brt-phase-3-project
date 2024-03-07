@@ -174,35 +174,48 @@ def remove():
 
 def sort_by_month():
     trips = Trip.get_all_by_visit()
-    sorted_trips = sorted(trips, key = lambda x: x[4])
-    return sorted_trips
+    sorted_trips = sorted(trips, key = lambda x: x[4], reverse=True)
+    if sorted_trips:
+        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        return results
+    else:
+        print("No entries to display.")
 
 def sort_by_year():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[5], reverse=True)
-    print(sorted_trips)
-    return sorted_trips
+    if sorted_trips:
+        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        return results
+    else:
+        print("No entries to display.")
 
 def sort_by_name():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[0])
-    print(sorted_trips)
-    return sorted_trips
+    if sorted_trips:
+        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        return results
+    else:
+        print("No entries to display.")
 
 def sort_by_state():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[2])
-    print(sorted_trips)
-    return sorted_trips
+    if sorted_trips:
+        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        return results
+    else:
+        print("No entries to display.")
 
 def sort_by_country():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[3])
-    print(sorted_trips)
-    return sorted_trips
-
-def all_sorted_by_visit():
-    Trip.get_all_by_visit()
+    if sorted_trips:
+        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        return results
+    else:
+        print("No entries to display.")
 
 def all_friends_visits():
     name = name_list[-1]
