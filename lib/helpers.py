@@ -24,7 +24,7 @@ def greeting():
         travelers[traveler.id] = traveler
     name_list.append(name)
     age_list.append(age)
-    return name, age
+    # return name, age
 
 def exit_program():
     print("Until next time, Traveler!")
@@ -77,8 +77,8 @@ def my_travels():
     name = name_list[-1]
     travels = Traveler.get_all_travels_by_name(name)
     if travels:
-        results = [print(f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>') for travels in travels]
-        return travels
+        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        return results
     else:
         print("\n No data. \n Enter a trip through the 'Where have you been?' menu to create table.\n")
 
@@ -99,31 +99,37 @@ def update_name():
         print("Something went wrong. Update incomplete. Please try again.")
 
 def trips_by_stars():
+    name = name_list[-1]
+    travels = Traveler.get_all_travels_by_name(name)
     stars = int(input("Enter number of stars:> "))
-    trips = [travel for travel in my_travels() if travel[6] == stars]
+    trips = [travel for travel in travels if travel[6] == stars]
     if trips:
-        print(trips)
-        return trips
+        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        return results
     else:
-        print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
+        print(f"No matching entries with {stars} stars.\n")
 
 def trips_by_country():
+    name = name_list[-1]
+    travels = Traveler.get_all_travels_by_name(name)
     country = input("Enter country:> ")
-    trips = [travel for travel in my_travels() if travel[3] == country]
+    trips = [travel for travel in travels if travel[3] == country]
     if trips:
-        print(trips)
-        return trips
+        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        return results
     else:
-        print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
+        print(f"No matching entries for {country}")
 
 def trips_by_state():
+    name = name_list[-1]
+    travels = Traveler.get_all_travels_by_name(name)
     state = input("Enter state:> ")
-    trips = [travel for travel in my_travels() if travel[2] == state]
+    trips = [travel for travel in travels if travel[2] == state]
     if trips:
-        print(trips)
-        return trips
+        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        return results
     else:
-        print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
+        print(f"No matching entries for {state}")
 
 def update_month():
     trip_id = int(input("Enter the trip ID for the trip you'd like to update:> "))
@@ -169,7 +175,6 @@ def remove():
 def sort_by_month():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[4])
-    print(sorted_trips)
     return sorted_trips
 
 def sort_by_year():
@@ -226,4 +231,4 @@ def reset_all():
     print("\n DATA HAS BEEN REMOVED \n")
 
 
-# ipdb.set_trace()
+ipdb.set_trace()

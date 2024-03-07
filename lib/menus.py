@@ -23,7 +23,7 @@ from helpers import (
 )
 
 def menu():
-    print("Please select an option (enter number correspoding with menu item):\n")
+    print("\nPlease select an option (enter number correspoding with menu item):")
     print("1. Where have you been? (Your travels)")
     print("2. Where have your friends been? (Friends' travels)")
     print("3. Show all travels (you and friends)")
@@ -93,27 +93,27 @@ def update_records_menu():
 
 def show_locations_menu():
     print("\nSelect how you'd like to review your travels\n")
-    print("1. Show ALL locations you've been to.")
+    print("1. Show ALL locations YOU've been to.")
     print("2. Show locations you've been to BY COUNTRY.")
     print("3. Show locations you've been to BY STATE")
     print("4. Show locations you've been to with X NUMBER OF STARS")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
-        my_travels()
+        print(my_travels())
     elif choice == "2":
         try:
-            trips_by_country()
+            print(trips_by_country())
         except:
             print("\n No trips by country recorded \n")
     elif choice == "3":
         try:
-            trips_by_state()
+            print(trips_by_state())
         except:
             print("\n No trips by state recorded \n")
     elif choice == "4":
         try:
-            trips_by_stars()
+            print(trips_by_stars())
         except:
             print("\n No trips by stars recorded \n")  
     elif choice == "0":
@@ -134,27 +134,27 @@ def show_all_loc_menu():
     choice = input("> ")
     if choice == "1":
         try:
-           sort_by_month()
+           print(sort_by_month())
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "2":
         try:
-            sort_by_year()
+            print(sort_by_year())
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "3":
         try:
-            sort_by_name()
+            print(sort_by_name())
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "4":
         try:
-            sort_by_state()
+            print(sort_by_state())
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "5":
         try:
-            sort_by_country()
+            print(sort_by_country())
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "6":
