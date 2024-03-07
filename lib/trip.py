@@ -15,7 +15,8 @@ class Trip:
         "september", 
         "october", 
         "november", 
-        "december"
+        "december",
+        "n/A"
     }
 
     all = {}
@@ -141,7 +142,7 @@ class Trip:
         if rows:
             return rows
         else:
-            raise ValueError("Table does not have any data")        
+            raise LookupError("Did not return any data; friends older than you have not recorded trips")      
 
     @classmethod
     def younger_friends(cls, age):
@@ -165,7 +166,7 @@ class Trip:
         if rows:
             return rows
         else:
-            raise ValueError("Table does not have any data") 
+            raise LookupError("Did not return any data; friends younger than you have not recorded trips") 
     
     @classmethod
     def find_name_by_id(cls, trav_id):
@@ -222,7 +223,9 @@ class Trip:
     
     @month.setter
     def month(self, new_month):
-        if isinstance(new_month,str):
+        if new_month == "N/A":
+            self._month = new_month
+        elif isinstance(new_month,str):
             if new_month.lower() in Trip.MONTHS:
                 self._month = new_month.capitalize()
             else:
@@ -236,8 +239,11 @@ class Trip:
 
     @year.setter
     def year(self, new_year):
-        if isinstance(new_year, int) or new_year == "N/A":
-            self._year = new_year    
+        if isinstance(new_year, int):
+            if new_year == 0:
+                self._year = "N/A"
+            else:
+                self._year = new_year    
         else:
             raise TypeError("Year must be an integer")
         
@@ -247,8 +253,10 @@ class Trip:
 
     @stars.setter
     def stars(self, new_stars):
-        if isinstance(new_stars, int) or new_stars == "N/A":
-            if 0 <= new_stars <= 5:
+        if isinstance(new_stars, int):
+            if new_stars == 0:
+                self._stars = "N/A"
+            elif 0 <= new_stars <= 5:
                 self._stars = new_stars
             else:
                 raise ValueError("Stars must be an integer between 0 and 5")    

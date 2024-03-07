@@ -17,14 +17,14 @@ def greeting():
         exit_program()
     print(f'\n  Hello, {name}! Nice to meet you.\n')
     try:
-        traveler = Traveler.find_by_name(name)
+        traveler = Traveler.find_by_name(name.capitalize())
         travelers[traveler.id] = traveler
     except:
-        traveler = Traveler.create_instance(name,age)
+        traveler = Traveler.create_instance(name.capitalize(),age)
         travelers[traveler.id] = traveler
     name_list.append(name)
     age_list.append(age)
-    # return name, age
+    
 
 def exit_program():
     print("Until next time, Traveler!")
@@ -51,14 +51,18 @@ def create_trip():
     stars = input("Out of 5, how many stars would you give it? (1: Meh to 5:Yeah!)> ")
     if stars == "0":
         exit_program()
+    if stars == "N/A":
+        stars = 0
     year = input("What year did you go?> ")
+    if year == "N/A":
+        year = 0
     if year == "0":
         exit_program()
     month = input("In what month?> ")
     if month == "0":
         exit_program()
     name = name_list[-1]
-    traveler = Traveler.find_by_name(name)
+    traveler = Traveler.find_by_name(name.capitalize())
     traveler_id = traveler.id
     try:
         location = Location.find_by_city(city_input)
@@ -75,7 +79,7 @@ def create_trip():
     
 def my_travels():    
     name = name_list[-1]
-    travels = Traveler.get_all_travels_by_name(name)
+    travels = Traveler.get_all_travels_by_name(name.capitalize())
     if travels:
         results = [f'<trip_id: {travels[0]}, ity: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
         return results
@@ -84,13 +88,13 @@ def my_travels():
 
 def update_name():
     name = name_list[-1]
-    traveler = Traveler.find_by_name(name)
+    traveler = Traveler.find_by_name(name.capitalize())
     age = traveler.age
     print(f"\nYour name is currently {name}.")
     print(f"Your age is currently {age}.\n")
     updated_name = input("Enter your updated name:> ")
     updated_age = int(input("Enter your updated age:> "))
-    traveler.name = updated_name
+    traveler.name = updated_name.capitalize()
     traveler.age = updated_age
     try:
         traveler.update_in_db()
@@ -100,7 +104,7 @@ def update_name():
 
 def trips_by_stars():
     name = name_list[-1]
-    travels = Traveler.get_all_travels_by_name(name)
+    travels = Traveler.get_all_travels_by_name(name.capitalize())
     stars = int(input("Enter number of stars:> "))
     trips = [travel for travel in travels if travel[6] == stars]
     if trips:
@@ -111,7 +115,7 @@ def trips_by_stars():
 
 def trips_by_country():
     name = name_list[-1]
-    travels = Traveler.get_all_travels_by_name(name)
+    travels = Traveler.get_all_travels_by_name(name.capitalize())
     country = input("Enter country:> ")
     trips = [travel for travel in travels if travel[3] == country]
     if trips:
@@ -122,7 +126,7 @@ def trips_by_country():
 
 def trips_by_state():
     name = name_list[-1]
-    travels = Traveler.get_all_travels_by_name(name)
+    travels = Traveler.get_all_travels_by_name(name.capitalize())
     state = input("Enter state:> ")
     trips = [travel for travel in travels if travel[2] == state]
     if trips:
@@ -217,7 +221,7 @@ def sort_by_country():
 
 def all_friends_visits():
     name = name_list[-1]
-    visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != name]
+    visits = [trip for trip in Trip.get_all_by_visit() if trip[0] != name.capitalize()]
     if not visits:
        print("\n Friends do not have any visits. Have them add some! \n")
     else:
@@ -226,13 +230,13 @@ def all_friends_visits():
 def older_friends():
     name = name_list[-1]
     age = age_list[-1]
-    visits = [trip for trip in Trip.older_friends(age) if trip[0] != name]
+    visits = [trip for trip in Trip.older_friends(age) if trip[0] != name.capitalize()]
     return visits
 
 def younger_friends():
     name = name_list[-1]
     age = age_list[-1]
-    visits = [trip for trip in Trip.younger_friends(age) if trip[0] != name]
+    visits = [trip for trip in Trip.younger_friends(age) if trip[0] != name.capitalize()]
     return visits
     
 def reset_all():
@@ -241,4 +245,4 @@ def reset_all():
     Traveler.reset() 
     print("\n DATA HAS BEEN REMOVED \n")
 
-# ipdb.set_trace()
+ipdb.set_trace()
