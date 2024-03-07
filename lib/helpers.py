@@ -77,7 +77,7 @@ def my_travels():
     name = name_list[-1]
     travels = Traveler.get_all_travels_by_name(name)
     if travels:
-        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        results = [f'<trip_id: {travels[0]}, ity: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
         return results
     else:
         print("\n No data. \n Enter a trip through the 'Where have you been?' menu to create table.\n")
@@ -104,7 +104,7 @@ def trips_by_stars():
     stars = int(input("Enter number of stars:> "))
     trips = [travel for travel in travels if travel[6] == stars]
     if trips:
-        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
         return results
     else:
         print(f"No matching entries with {stars} stars.\n")
@@ -115,7 +115,7 @@ def trips_by_country():
     country = input("Enter country:> ")
     trips = [travel for travel in travels if travel[3] == country]
     if trips:
-        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
         return results
     else:
         print(f"No matching entries for {country}")
@@ -126,37 +126,37 @@ def trips_by_state():
     state = input("Enter state:> ")
     trips = [travel for travel in travels if travel[2] == state]
     if trips:
-        results = [f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in travels]
+        results = [f'<trip_id: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in travels]
         return results
     else:
         print(f"No matching entries for {state}")
 
 def update_month():
-    trip_id = int(input("Enter the trip ID for the trip you'd like to update:> "))
+    trip_id = int(input("Enter the trip_id for the trip you'd like to update:> "))
     month = input("What month would you like to update to?> ")
     trip = Trip.find_by_id(trip_id)
     trip.month = month
     trip.update_row()
-    print(f"Updated month of Trip ID: {trip_id} to {month}\n")
+    print(f"Updated month of trip_id: {trip_id} to {month}\n")
 
 def update_year():
-    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    trip_id = input("Enter the trip_id for the trip you'd like to update:> ")
     year = input("What year would you like to update to?> ")
     trip = Trip.find_by_id(trip_id)
     trip.year = year
     trip.update_row()
-    print(f"Updated year of Trip ID: {trip_id} to {year}\n")
+    print(f"Updated year of trip_id: {trip_id} to {year}\n")
 
 def update_stars():
-    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    trip_id = input("Enter the trip_id for the trip you'd like to update:> ")
     stars = input("How many stars would you like to update to?> ")
     trip = Trip.find_by_id(trip_id)
     trip.stars = stars
     trip.update_row()
-    print(f"Updated stars of Trip ID:{trip_id} to {stars}\n")
+    print(f"Updated stars of trip_id:{trip_id} to {stars}\n")
 
 def update_all():
-    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    trip_id = input("Enter the trip_id for the trip you'd like to update:> ")
     month = input("What month would you like to update to?> ")
     year = input("What year would you like to update to?> ")
     stars = input("How many stars would you like to update to?> ")
@@ -165,10 +165,10 @@ def update_all():
     trip.year = year
     trip.stars = stars
     trip.update_row()
-    print(f"Updated month, year, stars for Trip ID: {trip_id} to {month}, {year}, {stars}, respectively\n")
+    print(f"Updated month, year, stars for trip_id: {trip_id} to {month}, {year}, {stars}, respectively\n")
 
 def remove():
-    trip_id = input("Enter the trip ID for the trip you'd like to remove:> ")
+    trip_id = input("Enter the trip_id for the trip you'd like to remove:> ")
     trip = Trip.find_by_id(trip_id)
     trip.destroy()    
 
@@ -176,7 +176,7 @@ def sort_by_month():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[4], reverse=True)
     if sorted_trips:
-        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]
         return results
     else:
         print("No entries to display.")
@@ -185,8 +185,7 @@ def sort_by_year():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[5], reverse=True)
     if sorted_trips:
-        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
-        return results
+        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]        return results
     else:
         print("No entries to display.")
 
@@ -194,7 +193,7 @@ def sort_by_name():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[0])
     if sorted_trips:
-        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]
         return results
     else:
         print("No entries to display.")
@@ -203,16 +202,14 @@ def sort_by_state():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[2])
     if sorted_trips:
-        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
-        return results
-    else:
+        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]
         print("No entries to display.")
 
 def sort_by_country():
     trips = Trip.get_all_by_visit()
     sorted_trips = sorted(trips, key = lambda x: x[3])
     if sorted_trips:
-        results = [f'<Name: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>' for travels in sorted_trips]
+        results = [f'<name: {travels[0]}, city: {travels[1]}, state: {travels[2]}, country: {travels[3]}, month: {travels[4]}, year: {travels[5]}, stars_given: {travels[6]}>' for travels in sorted_trips]
         return results
     else:
         print("No entries to display.")
