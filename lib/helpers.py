@@ -77,6 +77,7 @@ def my_travels():
     name = name_list[-1]
     travels = Traveler.get_all_travels_by_name(name)
     if travels:
+        results = [print(f'<Trip ID: {travels[0]}, City: {travels[1]}, State: {travels[2]}, Country: {travels[3]}, Month: {travels[4]}, Year: {travels[5]}, Stars Given: {travels[6]}>') for travels in travels]
         return travels
     else:
         print("\n No data. \n Enter a trip through the 'Where have you been?' menu to create table.\n")
@@ -225,3 +226,4 @@ def reset_all():
     print("\n DATA HAS BEEN REMOVED \n")
 
 
+# ipdb.set_trace()

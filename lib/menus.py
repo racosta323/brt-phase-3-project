@@ -154,7 +154,7 @@ def show_all_loc_menu():
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "5":
         try:
-            sort_by_country
+            sort_by_country()
         except:
             print("\n No trips. \n Enter a trip through the 'Where have you been?' menu to create table. \n")
     elif choice == "6":
