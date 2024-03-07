@@ -122,7 +122,7 @@ def trips_by_state():
         print("No data. \n Enter a trip through the 'Where have you been?' menu to create table.")
 
 def update_month():
-    trip_id = input("Enter the trip ID for the trip you'd like to update:> ")
+    trip_id = int(input("Enter the trip ID for the trip you'd like to update:> "))
     month = input("What month would you like to update to?> ")
     trip = Trip.find_by_id(trip_id)
     trip.month = month

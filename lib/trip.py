@@ -3,7 +3,21 @@ from __init__ import CONN, CURSOR
 
 class Trip:
 
-    MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}
+    MONTHS = {
+        "january", 
+        "february", 
+        "march", 
+        "april", 
+        "may", 
+        "june", 
+        "july", 
+        "august", 
+        "september", 
+        "october", 
+        "november", 
+        "december"
+    }
+
     all = {}
 
     @classmethod
@@ -51,7 +65,6 @@ class Trip:
             WHERE id = ?
         """
         row = CURSOR.execute(sql, (id,)).fetchone()
-        ipdb.set_trace()
         return cls.instance_from_db(row) if row else LookupError("Record not found: ID not in database")
     
     @classmethod
@@ -211,8 +224,8 @@ class Trip:
     @month.setter
     def month(self, new_month):
         if isinstance(new_month,str):
-            if new_month in Trip.MONTHS:
-                self._month = new_month
+            if new_month.lower() in Trip.MONTHS:
+                self._month = new_month.capitalize()
             else:
                 raise ValueError("String must be a month of the year")
         else:

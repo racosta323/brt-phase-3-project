@@ -48,8 +48,9 @@ def user_menu():
     print("1. Enter a record of a location you've been to")
     print("2. Show locations you've been to using sorting/filtering options")
     print("3. Show all locations (both your friends' and yours).")
-    print("4. Go back to prior menu")
-    print("5. Reset all tables (removes information)")
+    print("4. Update trip records")
+    print("5. Go back to prior menu")
+    print("6. Reset all tables (removes information)")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
@@ -59,6 +60,8 @@ def user_menu():
     elif choice == "3":
         show_all_loc_menu()
     elif choice == "4":
+        update_records_menu()   
+    elif choice == "5":
         menu()  
     elif choice == "5":
         print("\n Resetting will remove all data. There is NO turning back. \n Are you sure you want to remove data? \n")
@@ -70,15 +73,33 @@ def user_menu():
     else:
         print("Invalid choice -- enter number corresponding to menu item")
 
+def update_records_menu():
+    print("\nUpdate a trip record\n")
+    print("1. Update a location you've been to BY TRIP ID")
+    print("2. Remove a location you've been to.")
+    print("3. Go back to prior menu")
+    print("0. Exit the program")
+    choice = input("> ")
+    if choice == "1":
+        user_trip_update()
+    elif choice == "2":
+        remove()
+    elif choice == "3":
+        user_menu()    
+    elif choice == "4":
+        exit_program()    
+    else:
+        print("Invalid choice -- enter number corresponding to menu item")
+
 def show_locations_menu():
     print("\nSelect how you'd like to review your travels\n")
     print("1. Show ALL locations you've been to.")
     print("2. Show locations you've been to BY COUNTRY.")
     print("3. Show locations you've been to BY STATE")
     print("4. Show locations you've been to with X NUMBER OF STARS")
-    print("5. Update a location you've been to BY TRIP ID")
-    print("6. Remove a location you've been to.")
-    print("7. Go back to prior menu")
+    # print("5. Update a location you've been to BY TRIP ID")
+    # print("6. Remove a location you've been to.")
+    # print("7. Go back to prior menu")
     print("0. Exit the program")
     choice = input("> ")
     if choice == "1":
@@ -98,12 +119,12 @@ def show_locations_menu():
             trips_by_stars()
         except:
             print("\n No trips by stars recorded \n")
-    elif choice == "5":
-        user_trip_update()
-    elif choice == "6":
-        remove()
-    elif choice == "7":
-        user_menu()    
+    # elif choice == "5":
+    #     user_trip_update()
+    # elif choice == "6":
+    #     remove()
+    # elif choice == "7":
+    #     user_menu()    
     elif choice == "0":
         exit_program()
     else:
